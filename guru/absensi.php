@@ -69,9 +69,13 @@
                 <input name="siswa" class="form-control" placeholder="masukkan nama siswa">
             </div>
           
-            <div class="form-group">
-                <label>Kelas</label>
-                <input name="kelas" class="form-control" placeholder="masukkan kelas">
+            <div class="form-group" style="margin-top: 30px;">
+                <select class="form-control" name="kelas">
+                    <option selected>Pilih Kelas</option>
+                    <option value="X">X</option>
+                    <option value="XI">XI</option>
+                    <option value="XII">XII</option>
+                </select>
             </div>
             <div class="form-group">
                 <label>Jurusan</label>
@@ -86,7 +90,7 @@
                     <option value="Alpha">Alpha</option>
                 </select>
             </div>
-            <input type="submit" name="absen" class="btn btn-primary" value="Absen">
+            <input type="submit" name="absen" class="btn btn-primary" value="Absen & Kirim Ke TU">
     </div>
     </form>
 
@@ -132,7 +136,7 @@
                             ?>
                         </tbody>
                     </table>
-                    <button class="btn btn-danger btn-shadow btn-sm" type="submit" name="submit">Jadikan PDF</button>
+                  
     </div>
 </div>
 

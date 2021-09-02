@@ -14,139 +14,123 @@
         </ol>
     </div>
 </div>
-
-<!-- ISI -->
-<div class="table-responsive">
-
-    <div class="row">
-        <div class="col-lg-12">
-            <h3 class="page-header" style="margin-top:0px;">
-                Rekap Absensi Kelas
-            </h3>
-
-            <label>Pilih Range Tanggal :</label>
-
-            <form method="post">
-                <table class="table table-hover" style="margin-top:5px;">
-                    <tr>
-                        <th><label style="margin-top:5px;">Tanggal</label></th>
-                        <th><input type="text" class="form-control" name="tanggal1" id="from"></th>
-                        <th><label style="margin-top:5px;"> s/d tanggal </label></th>
-                        <th><input type="text" class="form-control" name="tanggal2" id="from1"></th>
-                        <th><input type="submit" name="submit" class="btn btn-default" value="Rekap"/></th>
-                    </tr>
-                </table>
-            </form>  
-
-            <?php
-            //Proses Cari
-                if (isset($_POST['submit'])) { 
-                    function ubahformatTgl($tanggal) {
-                        $pisah = explode('/',$tanggal);
-                        $urutan = array($pisah[2],$pisah[0],$pisah[1]);
-                        $satukan = implode('-',$urutan);
-                        return $satukan;
-                    }
-
-                    $tgl1=$_POST['tanggal1'];
-                    $tgl2=$_POST['tanggal2'];
-
-                    $tanggal1 = ubahformatTgl($tgl1);
-                    $tanggal2 = ubahformatTgl($tgl2);
-
-            ?>
-            <center><label>Tanggal&nbsp <?php echo date("d-m-Y", strtotime($tanggal1)); ?> &nbsps/d&nbsp tanggal &nbsp<?php echo date("d-m-Y", strtotime($tanggal2)); ?></label></center>
-        
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-12">
-            <?php
-            $kelas1 = mysql_query("select * from tb_kelas");
-            ?>
-            <ul class="nav nav-tabs responsive" id="myTab" style="margin-bottom:10px;">
-                <?php
-                    while($row1=mysql_fetch_array($kelas1)){       
-                ?>
-                <li class="test-class"><a class="deco-none misc-class" href="#<?php echo $row1['kelas']; ?>"> Kelas <?php echo $row1['kelas']; ?></a></li>
-                <?php
-                    }
-                ?>
-            </ul>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="tab-content responsive">
-            <?php
-                $kelas2 = mysql_query("select * from tb_kelas");
-                while($row2=mysql_fetch_array($kelas2)){
-                    $kelas=$row2['id_kelas'];
-                    $kela=$row2['kelas'];
-            ?>
-            <div class="tab-pane" id="<?php echo $row2['kelas']; ?>" style="margin-top:15px;">
-                <div class="row">
-                    <h4 class="page-header" style="margin-top:7px;" align="center">
-                        Rekap Absensi Kelas <?php echo $kela; ?>
-                    </h4>
-
-                    <div class="col-lg-7" style="padding-right:20px; border-right: 1px solid #ccc;">
-                        <table class="table table-hover table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th class="col-md-1">No</th>
-                                    <th>NIS</th>
-                                    <th>Nama Siswa</th>
-                                    <th class="col-md-1">Hadir</th>
-                                    <th class="col-md-1">Sakit</th>
-                                    <th class="col-md-1">Izin</th>
-                                    <th class="col-md-1">Alfa</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                    $view1=mysql_query("select nis, nama_siswa
-                                                        from tb_siswa
-                                                        where id_kelas='$kelas'
-                                                        order by nis asc");
-                                    $no=1;
-                                    while($raw1=mysql_fetch_array($view1)){
-                                    
-                                ?>
-                                <tr>
-                                    <td><?php echo $no; ?></td>
-                                    <td><?php echo $raw1['nis']; ?></td>
-                                    <td><?php echo $raw1['nama_siswa']; ?></td>
-                                    <td><?php echo mysql_num_rows(mysql_query("select * from tb_absensih where nis='$raw1[nis]' AND ket='H' AND tanggal between '$tanggal1' and '$tanggal2'")); ?></td>  
-                                    <td><?php echo mysql_num_rows(mysql_query("select * from tb_absensih where nis='$raw1[nis]' AND ket='S' AND tanggal between '$tanggal1' and '$tanggal2'")); ?></td>
-                                    <td><?php echo mysql_num_rows(mysql_query("select * from tb_absensih where nis='$raw1[nis]' AND ket='I' AND tanggal between '$tanggal1' and '$tanggal2'")); ?></td>
-                                    <td><?php echo mysql_num_rows(mysql_query("select * from tb_absensih where nis='$raw1[nis]' AND ket='A' AND tanggal between '$tanggal1' and '$tanggal2'")); ?></td>   
-                                </tr>
-                                <?php
-                                    $no++;
-                                    }
-                                ?>
-                            </tbody>
-                        </table>
-                        <input type="button" class="btn btn-default" value="Print" onClick="return window.open('print.php?kelas=<?php echo $kelas; ?>&tgl1=<?php echo $tanggal1; ?>&tgl2=<?php echo $tanggal2; ?>','page','toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=0,width=750,height=600,left=50,top=50,titlebar=yes');"/>
-                                                
-                    </div>
-
-                    <div class="col-lg-5">
-                        <h4 class="page-header" style="margin-top:7px;" align="center">
-                            Keterangan
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <?php
-                }
-                }
-            ?>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- -->
+<h4 class="page-header" style="text-align: center;">Absensi Murid Kelas X</h4>  
+<table class="table table-hover table-bordered table-striped">
+                        <thead>
+                            <tr>
+                            <th>No</th>
+                                <th>Tanggal</th>
+                                <th>Hari</th>
+                                <th>Nama Guru Pengajar</th>
+                                <th>Mata Pelajaran</th>
+                                <th>Nama Siswa</th>
+                                <th>Kelas</th>
+                                <th>Jurusan</th>
+                                <th>Status Kehadiran</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                                $view2=mysqli_query($conn,"select tanggal,hari,nama_guru,mapel,nama_siswa,kelas,jurusan,status_kehadiran
+                                                    from hasil_absensi where kelas='X' order by tanggal asc");
+                                $no=1;
+                                while($raw2=mysqli_fetch_array($view2)){
+                            ?>
+                          <tr>
+                                <td><?php echo $no; ?></td>
+                                <td><?php echo $raw2['tanggal']; ?></td>
+                                <td><?php echo $raw2['hari']; ?></td>
+                                <td><?php echo $raw2['nama_guru']; ?></td>
+                                <td><?php echo $raw2['mapel']; ?></td>
+                                <td><?php echo $raw2['nama_siswa']; ?></td>
+                                <td><?php echo $raw2['kelas']; ?></td>
+                                <td><?php echo $raw2['jurusan']; ?></td>
+                                <td><?php echo $raw2['status_kehadiran']; ?></td>
+                            </tr>
+                            <?php
+                                $no++;
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                    <h4 class="page-header" style="text-align: center;">Absensi Murid Kelas XI</h4>  
+<table class="table table-hover table-bordered table-striped">
+                        <thead>
+                            <tr>
+                            <th>No</th>
+                                <th>Tanggal</th>
+                                <th>Hari</th>
+                                <th>Nama Guru Pengajar</th>
+                                <th>Mata Pelajaran</th>
+                                <th>Nama Siswa</th>
+                                <th>Kelas</th>
+                                <th>Jurusan</th>
+                                <th>Status Kehadiran</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                                $view2=mysqli_query($conn,"select tanggal,hari,nama_guru,mapel,nama_siswa,kelas,jurusan,status_kehadiran
+                                                    from hasil_absensi where kelas='XI' order by tanggal asc");
+                                $no=1;
+                                while($raw2=mysqli_fetch_array($view2)){
+                            ?>
+                          <tr>
+                                <td><?php echo $no; ?></td>
+                                <td><?php echo $raw2['tanggal']; ?></td>
+                                <td><?php echo $raw2['hari']; ?></td>
+                                <td><?php echo $raw2['nama_guru']; ?></td>
+                                <td><?php echo $raw2['mapel']; ?></td>
+                                <td><?php echo $raw2['nama_siswa']; ?></td>
+                                <td><?php echo $raw2['kelas']; ?></td>
+                                <td><?php echo $raw2['jurusan']; ?></td>
+                                <td><?php echo $raw2['status_kehadiran']; ?></td>
+                            </tr>
+                            <?php
+                                $no++;
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                    <h4 class="page-header" style="text-align: center;">Absensi Murid Kelas XII</h4>  
+<table class="table table-hover table-bordered table-striped">
+                        <thead>
+                            <tr>
+                            <th>No</th>
+                                <th>Tanggal</th>
+                                <th>Hari</th>
+                                <th>Nama Guru Pengajar</th>
+                                <th>Mata Pelajaran</th>
+                                <th>Nama Siswa</th>
+                                <th>Kelas</th>
+                                <th>Jurusan</th>
+                                <th>Status Kehadiran</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                                $view2=mysqli_query($conn,"select tanggal,hari,nama_guru,mapel,nama_siswa,kelas,jurusan,status_kehadiran
+                                                    from hasil_absensi where kelas='XII' order by tanggal asc");
+                                $no=1;
+                                while($raw2=mysqli_fetch_array($view2)){
+                            ?>
+                          <tr>
+                                <td><?php echo $no; ?></td>
+                                <td><?php echo $raw2['tanggal']; ?></td>
+                                <td><?php echo $raw2['hari']; ?></td>
+                                <td><?php echo $raw2['nama_guru']; ?></td>
+                                <td><?php echo $raw2['mapel']; ?></td>
+                                <td><?php echo $raw2['nama_siswa']; ?></td>
+                                <td><?php echo $raw2['kelas']; ?></td>
+                                <td><?php echo $raw2['jurusan']; ?></td>
+                                <td><?php echo $raw2['status_kehadiran']; ?></td>
+                            </tr>
+                            <?php
+                                $no++;
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                    <a class="btn btn-danger btn-shadow btn-sm" target="_blank" href="../cetakAbsensiPDF.php">Jadikan PDF</a>
+                    <a class="btn btn-success btn-shadow btn-sm" target="_blank" href="../cetakAbsensiExcel.php">Jadikan Excel</a>

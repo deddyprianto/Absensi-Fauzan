@@ -70,9 +70,7 @@
                                 <td><?php echo $raw2['jam_mulai']; ?> - <?php echo $raw2['jam_berakhir'] ?></td>
                                 <td><?php echo $raw2['jumlah_les']; ?></td>
                             </tr>
-                            <?php
-                                $no++;
-                                }
+                            <?php $no++; }
                             ?>
                         </tbody>
                     </table>
