@@ -1,7 +1,6 @@
 <?php
     @session_start();
     include "koneksi.php";
-
     if(@$_SESSION['guru']){
         $id_login=@$_SESSION['guru'];
 ?>
@@ -14,7 +13,7 @@
         </h1>
         <ol class="breadcrumb">
             <li>
-                <i class="fa fa-dashboard"></i>  <a href="/som/guru/index.php">Dashboard</a>
+                <i class="fa fa-dashboard"></i>  <a href="./index.php">Dashboard</a>
             </li>
             <li class="active">
                 <i class="fa fa-send"></i> Absensi
@@ -23,128 +22,117 @@
     </div>
 </div>
 
-
-
 <!-- Isi -->
 <div class="row">
     <div class="col-lg-5">
         <h3 class="page-header">
-            Data Absensi
+            Form Absensi Siswa
         </h3> 
 
-        <form action="?page=absensi2" method="post">
+        <form method="post" action="prosestambah.php">
             <div class="form-group">
                 <label>Tanggal</label>
-                <input class="form-control" value=" <?php echo $tanggal; ?>" readonly="readonly">
+                <input class="form-control" name="tanggal" value=" <?php echo $tanggal; ?>" readonly="readonly">
             </div>
             
             <div class="form-group">
                 <label>Hari</label>
-                <input class="form-control" value="<?php echo tanggal("D"); ?>" readonly="readonly">
+                <input name="hari" class="form-control" value="<?php echo tanggal("D"); ?>" readonly="readonly">
             </div>
             <?php
-                $view=mysql_query("select 
+                $view=mysqli_query($conn,"select 
                                         tb_pengguna.username, 
-                                        tb_guru.nama_guru
+                                        tb_guru.nama_guru,
+                                        tb_guru.mapel
                                     from 
                                         tb_pengguna, 
                                         tb_guru
                                     where 
-                                        tb_pengguna.id_pengguna='$id_login' 
+                                        tb_pengguna.username='$id_login' 
                                         AND tb_pengguna.username=tb_guru.nip");
-                $row=mysql_fetch_array($view);
+                $row=mysqli_fetch_array($view);
             ?>
             <div class="form-group">
-                <label>Nama Guru</label>
-                <input class="form-control" value="<?php echo $row['nama_guru']; ?>" readonly="readonly">
+                <label>NIP</label>
+                <input name="nip" class="form-control" value="<?php echo $row['username']; ?>" readonly="readonly">
             </div>
-
+            <div class="form-group">
+                <label>Nama Guru</label>
+                <input name="guru" class="form-control" value="<?php echo $row['nama_guru']; ?>" readonly="readonly">
+            </div>
+            <div class="form-group">
+                <label>Mata Pelajaran</label>
+                <input name="mapel" class="form-control" placeholder="" value="<?= $row['mapel']; ?>" readonly="readonly">
+            </div>
+            <div class="form-group">
+                <label>Nama Siswa</label>
+                <input name="siswa" class="form-control" placeholder="masukkan nama siswa">
+            </div>
+          
+            <div class="form-group">
+                <label>Kelas</label>
+                <input name="kelas" class="form-control" placeholder="masukkan kelas">
+            </div>
+            <div class="form-group">
+                <label>Jurusan</label>
+                <input name="jurusan" class="form-control" placeholder="masukkan jurusan">
+            </div>
+            <div class="form-group" style="margin-top: 30px;">
+                <select class="form-control" name="status">
+                    <option selected>Pilih Kehadiran</option>
+                    <option value="Hadir">Hadir</option>
+                    <option value="Sakit">Sakit</option>
+                    <option value="Izin">Izin</option>
+                    <option value="Alpha">Alpha</option>
+                </select>
+            </div>
+            <input type="submit" name="absen" class="btn btn-primary" value="Absen">
     </div>
+    </form>
 
     <div class="col-lg-7">
         <h3 class="page-header">
-            Pilih Jadwal Absensi
+           Hasil Absensi
         </h3>
-        <div class="table-respopnsive">
-            <?php
-                $jam=date("H:i");
-                $hari=tanggal("D");
-                $tanggal0=date('Y-m-d');
-                $view1=mysql_query("select 
-                                        tb_pengguna.username, 
-                                        tb_mengajar.id_mengajar, 
-                                        tb_guru.kode_guru, 
-                                        tb_jadwal.id_jadwal,
-                                        tb_jadwal.id_kelas,  
-                                        tb_jadwal.hari, 
-                                        tb_jadwal.jam_mulai, 
-                                        tb_jadwal.jam_berakhir, 
-                                        tb_mapel.mapel,
-                                        tb_kelas.kelas
-                                    from 
-                                        tb_pengguna, 
-                                        tb_mengajar, 
-                                        tb_guru, 
-                                        tb_jadwal, 
-                                        tb_mapel,
-                                        tb_kelas 
-                                    where 
-                                        tb_pengguna.id_pengguna='$id_login' 
-                                        AND tb_pengguna.username=tb_guru.nip 
-                                        AND tb_guru.kode_guru=tb_mengajar.kode_guru 
-                                        AND tb_mengajar.id_mengajar=tb_jadwal.id_mengajar 
-                                        AND tb_jadwal.hari='$hari' 
-                                        AND tb_mengajar.kode_mapel=tb_mapel.kode_mapel
-                                        AND tb_jadwal.id_kelas=tb_kelas.id_kelas
-                                        
-                                    order by 
-                                        tb_jadwal.jam_mulai asc")
-                        or die (mysql_error());
-                
-            if(mysql_num_rows($view1)>0){  
-            ?>
-            <table class="table table-bordered table-hover table-striped">
-                <thead>
-                    <tr>
-                        <th>Pilih</th>
-                        <th>Kelas</th>
-                        <th>Mata Pelajaran</th>
-                        <th>Waktu</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                        while($row1=mysql_fetch_array($view1)){
-                    ?>
-                    <tr>
-                        <td>
+        <table class="table table-hover table-bordered table-striped">
+                        <thead>
+                            <tr>
+                            <th>No</th>
+                                <th>Tanggal</th>
+                                <th>Hari</th>
+                                <th>Nama Guru Pengajar</th>
+                                <th>Mata Pelajaran</th>
+                                <th>Nama Siswa</th>
+                                <th>Kelas</th>
+                                <th>Jurusan</th>
+                                <th>Status Kehadiran</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                                $view2=mysqli_query($conn,"select tanggal,hari,nama_guru,mapel,nama_siswa,kelas,jurusan,status_kehadiran
+                                                    from hasil_absensi where nip='$id_login' order by tanggal asc");
+                                $no=1;
+                                while($raw2=mysqli_fetch_array($view2)){
+                            ?>
+                          <tr>
+                                <td><?php echo $no; ?></td>
+                                <td><?php echo $raw2['tanggal']; ?></td>
+                                <td><?php echo $raw2['hari']; ?></td>
+                                <td><?php echo $raw2['nama_guru']; ?></td>
+                                <td><?php echo $raw2['mapel']; ?></td>
+                                <td><?php echo $raw2['nama_siswa']; ?></td>
+                                <td><?php echo $raw2['kelas']; ?></td>
+                                <td><?php echo $raw2['jurusan']; ?></td>
+                                <td><?php echo $raw2['status_kehadiran']; ?></td>
+                            </tr>
                             <?php
-                                $ada=mysql_query("select id_jadwal, tanggal from tb_absensi where tanggal='$tanggal0' and id_jadwal='$row1[id_jadwal]'");
-                                if(mysql_num_rows($ada)>0){
-                                    ?><i class="fa fa-check"></i><?php
-                                } else {
-                                    ?><input name="id_jadwal" type="radio" value="<?php echo $row1['id_jadwal']; ?>"><?php
+                                $no++;
                                 }
                             ?>
-                            
-                        </td>
-                        <td><?php echo $row1['kelas']; ?></td>
-                        <td><?php echo $row1['mapel'] ?></td>
-                        <td><?php echo $row1['jam_mulai']; ?> - <?php echo $row1['jam_berakhir']; ?></td>
-                    </tr>
-                    <?php
-                        }
-                	?>
-                </tbody>
-            </table>
-        </div>
-        <input type="submit" name="lanjut" class="btn btn-default" value="Ke Proses Absensi"/> 
-        </form>
-        <?php
-    	} else {
-    		echo "Tidak ada jadwal hari ini<br><br>Silahkan lihat <a href='http://localhost/som/guru/index.php?page=lihatjadwal'>jadwal</a>";
-    	}
-        ?>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-danger btn-shadow btn-sm" type="submit" name="submit">Jadikan PDF</button>
     </div>
 </div>
 

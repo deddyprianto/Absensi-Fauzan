@@ -102,7 +102,6 @@
                                 <div class="col-lg-8 text-right">
                                 </div>
                                 <div class="col-lg-8 text-right">
-                            
                                 <input type="submit" name="login" class="btn btn-primary" value="Log In">
                             </div>
                         </form>
@@ -116,18 +115,18 @@
                                     <script type="text/javascript">alert("Username / Password Tidak Boleh Kosong")</script>
                                     <?php
                                 } else {
-                                    $sql = mysql_query("select * from tb_pengguna where username = '$username' and pass = '$pass'") or die (mysql_error());
-                                    $data = mysql_fetch_array($sql);
-                                    $cek = mysql_num_rows($sql);
+                                    $sql = mysqli_query($conn, "select * from tb_pengguna where username = '$username' and pass = '$pass'");
+                                    $data = mysqli_fetch_array($sql);
+                                    $cek = mysqli_num_rows($sql);
                                         if ($cek >= 1){
                                             if($data['status'] == "admin"){
                                                 @$_SESSION ['admin'] = $data ['id_pengguna'];
-                                                header("location:/som/inde.php");
+                                                header("location:inde.php");
                                             } else if($data['status'] == "tatausaha"){
                                                 @$_SESSION ['tatausaha'] = $data ['id_pengguna'];
                                                 header("location:tatausaha/index.php");
                                             } else if($data['status'] == "guru"){
-                                                @$_SESSION ['guru'] = $data ['id_pengguna'];
+                                                @$_SESSION ['guru'] = $data ['username'];
                                                 header("location:guru/index.php");
                                             }
                             

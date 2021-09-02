@@ -26,51 +26,17 @@
 <!-- ISI -->
 <div class="row" style="margin-top:30px;">
     <div class="col-lg-5">
-        <h3 class="page-header" style="margin-top:0px;">
-            Data Guru
+        <h3 class="page-header" style="margin-top:0px; font-weight: bold; color: gray;">
+            Roster & Jadwal Guru
         </h3>
-        <?php
-            $viow=mysql_query("select tb_pengguna.username, tb_guru.nama_guru
-                                    from tb_pengguna, tb_guru
-                                    where tb_pengguna.id_pengguna='$id_login' AND tb_pengguna.username=tb_guru.nip");
-            $rew=mysql_fetch_array($viow);
-
-        ?>
-        <div class="form-group">
-            <label>Nama</label>
-            <input class="form-control" value=" <?php echo $rew['nama_guru']; ?>" readonly="readonly">
-        </div><br>
-
-        <?php
-            $view=mysql_query("select tb_pengguna.username, tb_mengajar.id_mengajar, tb_mengajar.kode_mapel, tb_guru.kode_guru, tb_mapel.mapel
-                                    from tb_pengguna, tb_mengajar, tb_guru, tb_mapel 
-                                    where tb_pengguna.id_pengguna='$id_login' AND tb_pengguna.username=tb_guru.nip AND tb_guru.kode_guru=tb_mengajar.kode_guru 
-                                    AND tb_mengajar.kode_mapel=tb_mapel.kode_mapel") or die (mysql_error());
-            $hitung=mysql_num_rows($view);
-        ?>
-        <label>Jumlah Mata Pelajaran : <?php echo $hitung; ?></label><br>
-        <?php
-            while($row=mysql_fetch_array($view)){
-        ?>
-        <div class="form-group">
-            <label>Mata Pelajaran</label>
-            <input class="form-control" value=" <?php echo $row['mapel']; ?>" readonly="readonly">
-        </div>
-
-        <div class="form-group">
-            <label>Kode Mapel</label>
-            <input class="form-control" value=" <?php echo $row['kode_mapel']; ?>" readonly="readonly">
-        </div><br>
-        <?php
-            }
-        ?>
     </div>
-
-
-    
     <div class="col-lg-7" style="border-left: 1px solid #ccc;">
-        <h3 class="page-header" style="margin-top:0px;">
-            Jadwal Mengajar
+    <?php 
+        $nama = mysqli_query($conn,"select nama_guru from jadwal_guru where nip='$id_login'");
+        $namaGuru = mysqli_fetch_array($nama);
+    ?>
+        <h3 class="page-header" style="margin-top:0px; font-weight: bold; color: gray;">
+            Jadwal Mengajar: <?= $namaGuru['nama_guru']; ?>
         </h3>
         <div class="table-responsive">
             <div class="row">
@@ -81,29 +47,28 @@
                     <table class="table table-hover table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>No</th>
+                            <th>No</th>
                                 <th>Kelas</th>
-                                <th>KM</th>
+                                <th>Jurusan</th>
+                                <th>Mata Pelajaran</th>
                                 <th>Waktu</th>
+                                <th>Jumlah Les</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                                $view1=mysql_query("select tb_pengguna.username, tb_mengajar.id_mengajar, tb_guru.kode_guru, 
-                                                    tb_jadwal.id_mengajar, tb_jadwal.hari, tb_jadwal.jam_mulai, tb_jadwal.jam_berakhir, tb_jadwal.id_kelas, 
-                                                    tb_mengajar.kode_mapel, tb_kelas.kelas
-                                                    from tb_pengguna, tb_mengajar, tb_guru, tb_jadwal, tb_kelas
-                                                    where tb_pengguna.id_pengguna='$id_login' AND tb_pengguna.username=tb_guru.nip AND tb_guru.kode_guru=tb_mengajar.kode_guru 
-                                                    AND tb_mengajar.id_mengajar=tb_jadwal.id_mengajar AND tb_jadwal.id_kelas=tb_kelas.id_kelas AND tb_jadwal.hari='Senin'
-                                                    order by jam_mulai asc");
+                        <?php
+                                $view2=mysqli_query($conn,"select nama_guru, mapel_dibawakan, jumlah_les,kelas,jam_mulai,jam_berakhir,jurusan
+                                                    from jadwal_guru where hari='Senin' AND nip='$id_login' order by jam_mulai asc");
                                 $no=1;
-                                while($raw1=mysql_fetch_array($view1)){
+                                while($raw2=mysqli_fetch_array($view2)){
                             ?>
-                            <tr>
+                          <tr class="success">
                                 <td><?php echo $no; ?></td>
-                                <td><?php echo $raw1['kelas']; ?></td>
-                                <td><?php echo $raw1['kode_mapel']; ?></td>
-                                <td><?php echo $raw1['jam_mulai']; ?> - <?php echo $raw1['jam_berakhir'] ?></td>
+                                <td><?php echo $raw2['kelas']; ?></td>
+                                <td><?php echo $raw2['jurusan']; ?></td>
+                                <td><?php echo $raw2['mapel_dibawakan']; ?></td>
+                                <td><?php echo $raw2['jam_mulai']; ?> - <?php echo $raw2['jam_berakhir'] ?></td>
+                                <td><?php echo $raw2['jumlah_les']; ?></td>
                             </tr>
                             <?php
                                 $no++;
@@ -118,30 +83,29 @@
                     </h4>
                     <table class="table table-hover table-bordered table-striped">
                         <thead>
-                            <tr>
-                                <th>No</th>
+                        <tr>
+                            <th>No</th>
                                 <th>Kelas</th>
-                                <th>KM</th>
+                                <th>Jurusan</th>
+                                <th>Mata Pelajaran</th>
                                 <th>Waktu</th>
+                                <th>Jumlah Les</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                                $view2=mysql_query("select tb_pengguna.username, tb_mengajar.id_mengajar, tb_guru.kode_guru, 
-                                                    tb_jadwal.id_mengajar, tb_jadwal.hari, tb_jadwal.jam_mulai, tb_jadwal.jam_berakhir, tb_jadwal.id_kelas, 
-                                                    tb_mengajar.kode_mapel, tb_kelas.kelas
-                                                    from tb_pengguna, tb_mengajar, tb_guru, tb_jadwal, tb_kelas
-                                                    where tb_pengguna.id_pengguna='$id_login' AND tb_pengguna.username=tb_guru.nip AND tb_guru.kode_guru=tb_mengajar.kode_guru 
-                                                    AND tb_mengajar.id_mengajar=tb_jadwal.id_mengajar AND tb_jadwal.id_kelas=tb_kelas.id_kelas AND tb_jadwal.hari='Selasa'
-                                                    order by jam_mulai asc");
+                        <?php
+                                $view2=mysqli_query($conn,"select nama_guru, mapel_dibawakan, jumlah_les,kelas,jam_mulai,jam_berakhir,jurusan
+                                                    from jadwal_guru where hari='Selasa' AND nip='$id_login' order by jam_mulai asc");
                                 $no=1;
-                                while($raw2=mysql_fetch_array($view2)){
+                                while($raw2=mysqli_fetch_array($view2)){
                             ?>
-                            <tr>
+                           <tr class="success">
                                 <td><?php echo $no; ?></td>
                                 <td><?php echo $raw2['kelas']; ?></td>
-                                <td><?php echo $raw2['kode_mapel']; ?></td>
+                                <td><?php echo $raw2['jurusan']; ?></td>
+                                <td><?php echo $raw2['mapel_dibawakan']; ?></td>
                                 <td><?php echo $raw2['jam_mulai']; ?> - <?php echo $raw2['jam_berakhir'] ?></td>
+                                <td><?php echo $raw2['jumlah_les']; ?></td>
                             </tr>
                             <?php
                                 $no++;
@@ -162,27 +126,27 @@
                             <tr>
                                 <th>No</th>
                                 <th>Kelas</th>
-                                <th>KM</th>
+                                <th>Jurusan</th>
+                                <th>Mata Pelajaran</th>
                                 <th>Waktu</th>
+                                <th>Jumlah Les</th>
                             </tr>
                         </thead>
                         <tbody>
+                         
                             <?php
-                                $view3=mysql_query("select tb_pengguna.username, tb_mengajar.id_mengajar, tb_guru.kode_guru, 
-                                                    tb_jadwal.id_mengajar, tb_jadwal.hari, tb_jadwal.jam_mulai, tb_jadwal.jam_berakhir, tb_jadwal.id_kelas, 
-                                                    tb_mengajar.kode_mapel, tb_kelas.kelas
-                                                    from tb_pengguna, tb_mengajar, tb_guru, tb_jadwal, tb_kelas
-                                                    where tb_pengguna.id_pengguna='$id_login' AND tb_pengguna.username=tb_guru.nip AND tb_guru.kode_guru=tb_mengajar.kode_guru 
-                                                    AND tb_mengajar.id_mengajar=tb_jadwal.id_mengajar AND tb_jadwal.id_kelas=tb_kelas.id_kelas AND tb_jadwal.hari='Rabu'
-                                                    order by jam_mulai asc");
+                                $view2=mysqli_query($conn,"select nama_guru, mapel_dibawakan, jumlah_les,kelas,jam_mulai,jam_berakhir,jurusan
+                                                    from jadwal_guru where hari='Rabu' AND nip='$id_login' order by jam_mulai asc");
                                 $no=1;
-                                while($raw3=mysql_fetch_array($view3)){
+                                while($raw2=mysqli_fetch_array($view2)){
                             ?>
-                            <tr>
+                            <tr class="success">
                                 <td><?php echo $no; ?></td>
-                                <td><?php echo $raw3['kelas']; ?></td>
-                                <td><?php echo $raw3['kode_mapel']; ?></td>
-                                <td><?php echo $raw3['jam_mulai']; ?> - <?php echo $raw3['jam_berakhir'] ?></td>
+                                <td><?php echo $raw2['kelas']; ?></td>
+                                <td><?php echo $raw2['jurusan']; ?></td>
+                                <td><?php echo $raw2['mapel_dibawakan']; ?></td>
+                                <td><?php echo $raw2['jam_mulai']; ?> - <?php echo $raw2['jam_berakhir'] ?></td>
+                                <td><?php echo $raw2['jumlah_les']; ?></td>
                             </tr>
                             <?php
                                 $no++;
@@ -190,6 +154,7 @@
                             ?>
                         </tbody>
                     </table>
+                  
                 </div>
                 <div class="col-lg-6">
                     <h4 class="page-header" style="margin-top:7px;" align="center">
@@ -200,27 +165,26 @@
                             <tr>
                                 <th>No</th>
                                 <th>Kelas</th>
-                                <th>KM</th>
+                                <th>Jurusan</th>
+                                <th>Mata Pelajaran</th>
                                 <th>Waktu</th>
+                                <th>Jumlah Les</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                                $view4=mysql_query("select tb_pengguna.username, tb_mengajar.id_mengajar, tb_guru.kode_guru, 
-                                                    tb_jadwal.id_mengajar, tb_jadwal.hari, tb_jadwal.jam_mulai, tb_jadwal.jam_berakhir, tb_jadwal.id_kelas, 
-                                                    tb_mengajar.kode_mapel, tb_kelas.kelas
-                                                    from tb_pengguna, tb_mengajar, tb_guru, tb_jadwal, tb_kelas
-                                                    where tb_pengguna.id_pengguna='$id_login' AND tb_pengguna.username=tb_guru.nip AND tb_guru.kode_guru=tb_mengajar.kode_guru 
-                                                    AND tb_mengajar.id_mengajar=tb_jadwal.id_mengajar AND tb_jadwal.id_kelas=tb_kelas.id_kelas AND tb_jadwal.hari='Kamis'
-                                                    order by jam_mulai asc");
+                                $view2=mysqli_query($conn,"select nama_guru, mapel_dibawakan, jumlah_les,kelas,jam_mulai,jam_berakhir,jurusan
+                                                    from jadwal_guru where hari='Kamis' AND nip='$id_login' order by jam_mulai asc");
                                 $no=1;
-                                while($raw4=mysql_fetch_array($view4)){
+                                while($raw2=mysqli_fetch_array($view2)){
                             ?>
-                            <tr>
+                            <tr class="success">
                                 <td><?php echo $no; ?></td>
-                                <td><?php echo $raw4['kelas']; ?></td>
-                                <td><?php echo $raw4['kode_mapel']; ?></td>
-                                <td><?php echo $raw4['jam_mulai']; ?> - <?php echo $raw4['jam_berakhir'] ?></td>
+                                <td><?php echo $raw2['kelas']; ?></td>
+                                <td><?php echo $raw2['jurusan']; ?></td>
+                                <td><?php echo $raw2['mapel_dibawakan']; ?></td>
+                                <td><?php echo $raw2['jam_mulai']; ?> - <?php echo $raw2['jam_berakhir'] ?></td>
+                                <td><?php echo $raw2['jumlah_les']; ?></td>
                             </tr>
                             <?php
                                 $no++;
@@ -238,30 +202,29 @@
                     </h4>
                     <table class="table table-hover table-bordered table-striped">
                         <thead>
-                            <tr>
-                                <th>No</th>
+                        <tr>
+                            <th>No</th>
                                 <th>Kelas</th>
-                                <th>KM</th>
+                                <th>Jurusan</th>
+                                <th>Mata Pelajaran</th>
                                 <th>Waktu</th>
+                                <th>Jumlah Les</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                                $view5=mysql_query("select tb_pengguna.username, tb_mengajar.id_mengajar, tb_guru.kode_guru, 
-                                                    tb_jadwal.id_mengajar, tb_jadwal.hari, tb_jadwal.jam_mulai, tb_jadwal.jam_berakhir, tb_jadwal.id_kelas, 
-                                                    tb_mengajar.kode_mapel, tb_kelas.kelas
-                                                    from tb_pengguna, tb_mengajar, tb_guru, tb_jadwal, tb_kelas
-                                                    where tb_pengguna.id_pengguna='$id_login' AND tb_pengguna.username=tb_guru.nip AND tb_guru.kode_guru=tb_mengajar.kode_guru 
-                                                    AND tb_mengajar.id_mengajar=tb_jadwal.id_mengajar AND tb_jadwal.id_kelas=tb_kelas.id_kelas AND tb_jadwal.hari='Jumat'
-                                                    order by jam_mulai asc");
+                        <?php
+                                $view2=mysqli_query($conn,"select nama_guru, mapel_dibawakan, jumlah_les,kelas,jam_mulai,jam_berakhir,jurusan
+                                                    from jadwal_guru where hari='Jumat' AND nip='$id_login' order by jam_mulai asc");
                                 $no=1;
-                                while($raw5=mysql_fetch_array($view5)){
+                                while($raw2=mysqli_fetch_array($view2)){
                             ?>
-                            <tr>
+                         <tr class="success">
                                 <td><?php echo $no; ?></td>
-                                <td><?php echo $raw5['kelas']; ?></td>
-                                <td><?php echo $raw5['kode_mapel']; ?></td>
-                                <td><?php echo $raw5['jam_mulai']; ?> - <?php echo $raw5['jam_berakhir'] ?></td>
+                                <td><?php echo $raw2['kelas']; ?></td>
+                                <td><?php echo $raw2['jurusan']; ?></td>
+                                <td><?php echo $raw2['mapel_dibawakan']; ?></td>
+                                <td><?php echo $raw2['jam_mulai']; ?> - <?php echo $raw2['jam_berakhir'] ?></td>
+                                <td><?php echo $raw2['jumlah_les']; ?></td>
                             </tr>
                             <?php
                                 $no++;
@@ -276,30 +239,29 @@
                     </h4>
                     <table class="table table-hover table-bordered table-striped">
                         <thead>
-                            <tr>
-                                <th>No</th>
+                        <tr>
+                            <th>No</th>
                                 <th>Kelas</th>
-                                <th>KM</th>
+                                <th>Jurusan</th>
+                                <th>Mata Pelajaran</th>
                                 <th>Waktu</th>
+                                <th>Jumlah Les</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                                $view6=mysql_query("select tb_pengguna.username, tb_mengajar.id_mengajar, tb_guru.kode_guru, 
-                                                    tb_jadwal.id_mengajar, tb_jadwal.hari, tb_jadwal.jam_mulai, tb_jadwal.jam_berakhir, tb_jadwal.id_kelas, 
-                                                    tb_mengajar.kode_mapel, tb_kelas.kelas
-                                                    from tb_pengguna, tb_mengajar, tb_guru, tb_jadwal, tb_kelas
-                                                    where tb_pengguna.id_pengguna='$id_login' AND tb_pengguna.username=tb_guru.nip AND tb_guru.kode_guru=tb_mengajar.kode_guru 
-                                                    AND tb_mengajar.id_mengajar=tb_jadwal.id_mengajar AND tb_jadwal.id_kelas=tb_kelas.id_kelas AND tb_jadwal.hari='Sabtu'
-                                                    order by jam_mulai asc");
+                        <?php
+                                $view2=mysqli_query($conn,"select nama_guru, mapel_dibawakan, jumlah_les,kelas,jam_mulai,jam_berakhir,jurusan
+                                                    from jadwal_guru where hari='Sabtu' AND nip='$id_login' order by jam_mulai asc");
                                 $no=1;
-                                while($raw6=mysql_fetch_array($view6)){
+                                while($raw2=mysqli_fetch_array($view2)){
                             ?>
-                            <tr>
+                          <tr class="success">
                                 <td><?php echo $no; ?></td>
-                                <td><?php echo $raw6['kelas']; ?></td>
-                                <td><?php echo $raw6['kode_mapel']; ?></td>
-                                <td><?php echo $raw6['jam_mulai']; ?> - <?php echo $raw6['jam_berakhir'] ?></td>
+                                <td><?php echo $raw2['kelas']; ?></td>
+                                <td><?php echo $raw2['jurusan']; ?></td>
+                                <td><?php echo $raw2['mapel_dibawakan']; ?></td>
+                                <td><?php echo $raw2['jam_mulai']; ?> - <?php echo $raw2['jam_berakhir'] ?></td>
+                                <td><?php echo $raw2['jumlah_les']; ?></td>
                             </tr>
                             <?php
                                 $no++;

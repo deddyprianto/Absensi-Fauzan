@@ -1,3 +1,4 @@
+<?php   include "koneksi.php"; ?>
 <div class="row">
     <div class="col-lg-12" style="margin-top:-10px;">
         <h1 class="page-header">
@@ -28,7 +29,7 @@
 <div class="row">
     <div class="col-lg-12">
         <?php   
-            $result = mysql_query("select * from tb_guru order by nip asc");  
+            $result = mysqli_query($conn,"select * from tb_guru order by nip asc");  
         ?>
         <i><a href="inde.php?page=inputguru">Data Baru Guru</a></i><br><br>
         <div class="table-responsive">
@@ -46,7 +47,7 @@
                 </thead>
                 <tbody>
                     <?php
-                        while($raw=mysql_fetch_array($result)){
+                        while($raw=mysqli_fetch_array($result)){
                     ?>
                     <tr>
                         <td><?php echo $raw['nip']; ?></td>

@@ -1,5 +1,6 @@
 <?php
-	ob_start();
-	mysqli_connect("localhost", "root", "") or die (mysqli_error());
-	mysqli_select_db("db_absensi") or die (mysqli_error());
-?>
+$host	='localhost';
+$user	='root';
+$pass	='';
+$db	='db_absensi';
+$conn	= mysqli_connect($host,$user,$pass,$db) or die ("koneksi ke Database Gagal !!!");

@@ -1,3 +1,4 @@
+<?php   include "koneksi.php"; ?>
 <div class="row">
     <div class="col-lg-12" style="margin-top:-10px;">
         <h1 class="page-header">
@@ -29,8 +30,8 @@
     <!-- Sript ambil data -->
     <?php
         $id = @$_GET['id'];
-        $qrykoreksi=mysql_query("select * from tb_guru where id_guru='$id'");
-        $data=mysql_fetch_object($qrykoreksi);
+        $qrykoreksi=mysqli_query($conn,"select * from tb_guru where id_guru='$id'");
+        $data=mysqli_fetch_object($qrykoreksi);
     ?>
     <form method="post">
         <div class="col-lg-6">
@@ -39,8 +40,8 @@
                 <input class="form-control" name="nip" value="<?php echo $data->nip;?>">
             </div>
             <?php
-               $a=mysql_query("select * from tb_pengguna where username='$data->nip'"); 
-               $b=mysql_fetch_object($a);
+               $a=mysqli_query($conn,"select * from tb_pengguna where username='$data->nip'"); 
+               $b=mysqli_fetch_object($a);
             ?>
             <div class="form-group">
                 <label>Nama Guru</label>
@@ -98,10 +99,9 @@
         $alamat=strtoupper($_POST['alamat']);
         $agama=strtoupper($_POST['agama']);
         
-        $query=mysql_query("UPDATE tb_guru SET nip='$nip', nama_guru='$nama_guru', kode_guru='$kode_guru', jenis_kelamin='$jenis_kelamin', tempat_lahir='$tempat_lahir',
-                            tanggal_lahir='$tanggal_lahir', alamat='$alamat', agama='$agama' WHERE id_guru='$id'") 
-                            or die (mysql_error());
-        $query1=mysql_query("UPDATE tb_pengguna SET username='$nip' where id_pengguna='$b->id_pengguna'");
+        $query=mysqli_query($conn,"UPDATE tb_guru SET nip='$nip', nama_guru='$nama_guru', kode_guru='$kode_guru', jenis_kelamin='$jenis_kelamin', tempat_lahir='$tempat_lahir',
+                            tanggal_lahir='$tanggal_lahir', alamat='$alamat', agama='$agama' WHERE id_guru='$id'");
+        $query1=mysqli_query($conn,"UPDATE tb_pengguna SET username='$nip' where id_pengguna='$b->id_pengguna'");
         if($query){
         ?>
             <script type="text/javascript">

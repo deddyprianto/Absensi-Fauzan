@@ -1,4 +1,5 @@
 <!-- Heading -->
+<?php include "koneksi.php"; ?>
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
@@ -26,8 +27,8 @@
         <!-- Script Ambil Data -->
         <?php
             $kode = @$_GET['id'];
-            $qrykoreksi=mysql_query("select * from tb_mapel where id_mapel='$kode'") or die (mysql_error());
-            $data=mysql_fetch_object($qrykoreksi);
+            $qrykoreksi=mysqli_query($conn,"select * from tb_mapel where id_mapel='$kode'");
+            $data=mysqli_fetch_object($qrykoreksi);
         ?>
 
         <form method="post">
@@ -49,7 +50,7 @@
                 $mapel=strtoupper($_POST['mapel']);
                 
                 
-                $query=mysql_query("update tb_mapel set kode_mapel='$kode_mapel', mapel='$mapel' where id_mapel='$kode'") or die (mysql_error());
+                $query=mysqli_query($conn,"update tb_mapel set kode_mapel='$kode_mapel', mapel='$mapel' where id_mapel='$kode'");
                 
                 if($query){
                     ?>

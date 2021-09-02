@@ -1,3 +1,4 @@
+<?php   include "koneksi.php"; ?>
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
@@ -25,8 +26,8 @@
         <!-- Sript ambil data -->
         <?php
             $id = @$_GET['id'];
-            $qrykoreksi=mysql_query("select * from tb_kelas where id_kelas='$id'");
-            $data=mysql_fetch_object($qrykoreksi);
+            $qrykoreksi=mysqli_query($conn,"select * from tb_kelas where id_kelas='$id'");
+            $data=mysqli_fetch_object($qrykoreksi);
         ?>
 
         <form method="post">
@@ -42,7 +43,7 @@
         if(@$_POST['edit']){
             $kelas=strtoupper($_POST['kelas']);
             
-            $query=mysql_query("UPDATE tb_kelas SET kelas='$kelas' WHERE id_kelas='$id'") or die (mysql_error());
+            $query=mysqli_query($conn,"UPDATE tb_kelas SET kelas='$kelas' WHERE id_kelas='$id'");
             
             if($query){
                 ?>

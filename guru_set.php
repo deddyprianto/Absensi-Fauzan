@@ -1,3 +1,4 @@
+<?php  include "koneksi.php";  ?>
 <div class="row">
     <div class="col-lg-12" style="margin-top:-10px;">
         <h1 class="page-header">
@@ -27,8 +28,8 @@
                 <select name="kode_guru" class="form-control" required>
                     <option value="">Pilih Guru</option>
                     <?php 
-                        $query=mysql_query("select * from tb_guru order by nip asc");
-                        while($row=mysql_fetch_array($query))
+                        $query=mysqli_query($conn,"select * from tb_guru order by nip asc");
+                        while($row=mysqli_fetch_array($query))
                         {
                     ?>
                         <option value="<?php  echo $row['kode_guru']; ?>"><?php  echo $row['nama_guru']; ?></option>
@@ -42,8 +43,8 @@
                 <select name="kode_mapel" class="form-control" required>
                     <option value="">Pilih Mapel</option>
                     <?php 
-                        $query=mysql_query("select * from tb_mapel order by kode_mapel asc");
-                        while($row=mysql_fetch_array($query))
+                        $query=mysqli_query($conn,"select * from tb_mapel order by kode_mapel asc");
+                        while($row=mysqli_fetch_array($query))
                         {
                     ?>
                         <option value="<?php  echo $row['kode_mapel']; ?>"><?php  echo $row['mapel']; ?></option>
@@ -61,7 +62,7 @@
             $kode_guru=strtoupper($_POST['kode_guru']);
             $kode_mapel=strtoupper($_POST['kode_mapel']);
             
-            $query=mysql_query("insert into tb_mengajar(kode_guru, kode_mapel) values('$kode_guru','$kode_mapel')") or die (mysql_error());
+            $query=mysqli_query($conn,"insert into tb_mengajar(kode_guru, kode_mapel) values('$kode_guru','$kode_mapel')");
             
             if($query){
             ?>
@@ -89,7 +90,7 @@
         </h3>
         <div class="table-responsive">
             <?php
-                $view=mysql_query("SELECT tb_guru.nama_guru, tb_mengajar.id_mengajar, tb_mapel.mapel from tb_guru, tb_mengajar, tb_mapel 
+                $view=mysqli_query($conn,"SELECT tb_guru.nama_guru, tb_mengajar.id_mengajar, tb_mapel.mapel from tb_guru, tb_mengajar, tb_mapel 
                                     where tb_mengajar.kode_guru=tb_guru.kode_guru AND tb_mengajar.kode_mapel=tb_mapel.kode_mapel
                                     order by tb_mengajar.kode_guru asc");
                 $no=0;
@@ -105,7 +106,7 @@
                 </thead>
                 <tbody>
                     <?php
-                        while($row=mysql_fetch_array($view)){
+                        while($row=mysqli_fetch_array($view)){
                     ?>
                     <tr>
                         <td><?php echo $no=$no+1; ?></td>

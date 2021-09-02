@@ -30,7 +30,7 @@
 	            Data Guru
 	        </h3>
 	        <?php
-	            $view=mysql_query("select 
+	            $view=mysqli_query($conn,"select 
 	            						tb_pengguna.username, 
 	            						tb_guru.nama_guru
 	                                from 
@@ -39,7 +39,7 @@
 	                                where 
 	                                	tb_pengguna.id_pengguna='$id_login' 
 	                                	AND tb_pengguna.username=tb_guru.nip");
-	            $row=mysql_fetch_array($view);
+	            $row=mysqli_fetch_array($view);
 
 	        ?>
 	        <div class="form-group">
@@ -48,7 +48,7 @@
 	        </div><br>
 
 	        <?php
-	            $view1=mysql_query("select 
+	            $view1=mysqli_query($conn,"select 
 	            						tb_pengguna.username, 
 	            						tb_mengajar.id_mengajar, 
 	            						tb_mengajar.kode_mapel, 
@@ -66,11 +66,11 @@
 	                                	AND tb_guru.kode_guru=tb_mengajar.kode_guru 
 	                                    AND tb_mengajar.kode_mapel=tb_mapel.kode_mapel") 
 	            or die (mysql_error());
-	            $num=mysql_num_rows($view1);
+	            $num=mysqli_num_rows($view1);
 	        ?>
 	        <label>Jumlah Mata Pelajaran : <?php echo $num; ?></label><br>
 	        <?php
-	            while($row1=mysql_fetch_array($view1)){
+	            while($row1=mysqli_fetch_array($view1)){
 	        ?>
 	        <div class="form-group">
 	            <label>Mata Pelajaran</label>
@@ -132,7 +132,7 @@
 
 			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 				<?php
-		            $view5=mysql_query("select 
+		            $view5=mysqli_query($conn,"select 
 		            						tb_pengguna.username, 
 		            						tb_mengajar.id_mengajar, 
 		            						tb_mengajar.kode_mapel, 
@@ -148,7 +148,7 @@
 		            or die (mysql_error());
 
 		            $nomor1=0;
-		            while($row5=mysql_fetch_array($view5)){
+		            while($row5=mysqli_fetch_array($view5)){
 		            	$kodemapel=$row5['kode_mapel'];
 		        ?>
 				<div class="panel panel-default">
@@ -164,12 +164,12 @@
 				        	<div class="row">
 						        <div class="col-lg-12">
 						            <?php
-						            $view2 = mysql_query("select * from tb_kelas");
+						            $view2 = mysqli_query($conn,"select * from tb_kelas");
 						            ?>
 						            <ul class="nav nav-tabs responsive" id="myTab" style="margin-bottom:10px;">
 						                <?php
 						                	$nomor2=0;
-						                    while($row2=mysql_fetch_array($view2)){       
+						                    while($row2=mysqli_fetch_array($view2)){       
 						                ?>
 						                <li class="test-class"><a class="deco-none misc-class" href="#<?php echo $nomor1.$nomor2; ?>"> Kelas <?php echo $row2['kelas']; ?></a></li>
 						                <?php
@@ -185,9 +185,9 @@
 						        <div class="col-lg-12">
 						            <div class="tab-content responsive">
 						            <?php
-						                $view3 = mysql_query("select * from tb_kelas");
+						                $view3 = mysqli_query($conn,"select * from tb_kelas");
 						                $nomor3=0;
-						                while($row3=mysql_fetch_array($view3)){
+						                while($row3=mysqli_fetch_array($view3)){
 						                	$kelasid=$row3['id_kelas'];
 						            ?>
 							            <div class="tab-pane" id="<?php echo $nomor1.$nomor3; ?>" style="margin-top:15px;">
@@ -213,18 +213,18 @@
 							                            </thead>
 							                            <tbody>
 							                                <?php
-							                                    $view4=mysql_query("select nis, nama_siswa
+							                                    $view4=mysqli_query($conn,"select nis, nama_siswa
 							                                                        from tb_siswa
 							                                                        where id_kelas='$kelasid'
 							                                                        order by nis asc");
 							                                    $no=1;
-							                                    while($row4=mysql_fetch_array($view4)){
+							                                    while($row4=mysqli_fetch_array($view4)){
 							                                ?>
 							                                <tr>
 							                                    <td><?php echo $no; ?></td>
 							                                    <td style="text-align: left;"><?php echo $row4['nis']; ?></td>
 							                                    <td style="text-align: left;"><?php echo $row4['nama_siswa']; ?></td>
-							                                    <td><?php echo mysql_num_rows(mysql_query("SELECT 
+							                                    <td><?php echo mysqli_num_rows(mysqli_query($conn,"SELECT 
 							                                    		tb_pengguna.username, 
 																		tb_mengajar.id_mengajar, 
 																		tb_mengajar.kode_mapel, 
@@ -250,7 +250,7 @@
 							                                    		AND tb_absensi.ket='H' 
 							                                    		AND tb_absensi.tanggal between '$tanggal1' and '$tanggal2'")); ?>
 							                                    </td> 
-							                                    <td><?php echo mysql_num_rows(mysql_query("SELECT 
+							                                    <td><?php echo mysqli_num_rows(mysqli_query($conn,"SELECT 
 							                                    		tb_pengguna.username, 
 																		tb_mengajar.id_mengajar, 
 																		tb_mengajar.kode_mapel, 
@@ -276,7 +276,7 @@
 							                                    		AND tb_absensi.ket='S' 
 							                                    		AND tb_absensi.tanggal between '$tanggal1' and '$tanggal2'")); ?>
 							                                    </td>
-							                                    <td><?php echo mysql_num_rows(mysql_query("SELECT 
+							                                    <td><?php echo mysqli_num_rows(mysqli_query($conn,"SELECT 
 							                                    		tb_pengguna.username, 
 																		tb_mengajar.id_mengajar, 
 																		tb_mengajar.kode_mapel, 
@@ -302,7 +302,7 @@
 							                                    		AND tb_absensi.ket='I' 
 							                                    		AND tb_absensi.tanggal between '$tanggal1' and '$tanggal2'")); ?>
 							                                    </td>
-							                                    <td><?php echo mysql_num_rows(mysql_query("SELECT 
+							                                    <td><?php echo mysqli_num_rows(mysqli_query($conn,"SELECT 
 							                                    		tb_pengguna.username, 
 																		tb_mengajar.id_mengajar, 
 																		tb_mengajar.kode_mapel, 

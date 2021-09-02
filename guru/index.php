@@ -18,19 +18,19 @@
 
     <title>SI Absensi -- Guru</title>
 
-    <link rel="stylesheet" type="text/css"  href="/som/css/smart-forms.css">
+    <link rel="stylesheet" type="text/css"  href="../css/smart-forms.css">
 
     <!-- Bootstrap Core CSS -->
-    <link href="/som/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="/som/css/sb-admin.css" rel="stylesheet">
+    <link href="../css/sb-admin.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="/som/css/plugins/morris.css" rel="stylesheet">
+    <link href="../css/plugins/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="/som/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <style>
         .table th {
@@ -108,7 +108,7 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="/som/guru/index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="./index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
                         <a href="?page=absensi"><i class="fa fa-fw fa-send"></i> Absensi</a>

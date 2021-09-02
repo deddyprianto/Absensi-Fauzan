@@ -119,9 +119,7 @@
                             <li>
                                 <a href="?page=lihatguru">Lihat Data Guru</a>
                             </li>
-                            <li>
-                                <a href="?page=setmapel">Set Mapel</a>
-                            </li>
+                           
                         </ul>
                     </li>
                     <li>

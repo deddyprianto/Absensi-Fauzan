@@ -1,3 +1,6 @@
+<?php 
+include './koneksi.php'; 
+?>
 <div class="row">
     <div class="col-lg-12" style="margin-top:-10px;">
         <h1 class="page-header">
@@ -44,8 +47,8 @@
                 <select name="kelas" class="form-control" required>
                     <option value="">Pilih Kelas</option>
                     <?php 
-                        $query=mysql_query("SELECT * from tb_kelas order by id_kelas asc");
-                        while($row=mysql_fetch_array($query))
+                        $query=mysqli_query($conn,"SELECT * from tb_kelas order by id_kelas asc");
+                        while($row=mysqli_fetch_array($query))
                         {
                     ?>
                         <option value="<?php  echo $row['id_kelas']; ?>"><?php  echo $row['kelas']; ?></option>
@@ -55,22 +58,62 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Guru -- Mapel</label>
-                <select name="id_mengajar" class="form-control" required>
-                    <option value="">Guru -- Mapel</option>
+                <label>Jurusan</label>
+                <select name="jurusan" class="form-control" required>
+                    <option value="">Pilih Jurusan</option>
+                    <option value="IPA">IPA</option>
+                    <option value="IPS">IPS</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>NIP Guru</label>
+                <select name="nip" class="form-control" required>
+                    <option value="">Pilih NIP Guru</option>
                     <?php 
-                        $query=mysql_query("SELECT tb_guru.nama_guru, tb_mengajar.id_mengajar, tb_mapel.mapel 
-                                            from tb_guru, tb_mengajar, tb_mapel 
-                                            where tb_mengajar.kode_guru=tb_guru.kode_guru AND tb_mengajar.kode_mapel=tb_mapel.kode_mapel
-                                            order by tb_mengajar.kode_guru asc");
-                        while($row=mysql_fetch_array($query))
+                        $query=mysqli_query($conn,"SELECT nip,nama_guru from tb_guru order by nip asc");
+                        while($row=mysqli_fetch_array($query))
                         {
                     ?>
-                        <option value="<?php  echo $row['id_mengajar']; ?>"><?php  echo $row['nama_guru']; ?> -- <?php  echo $row['mapel']; ?></option>
+                        <option value="<?php  echo $row['nip']; ?>"><?= $row['nip']; ?>--<?php  echo $row['nama_guru']; ?></option>
                     <?php 
                         }
                 ?>
                 </select>
+            </div>
+            <div class="form-group">
+            <label>Nama Guru</label>
+                <select name="nama" class="form-control" required>
+                    <option value="">Pilih Nama Guru</option>
+                    <?php 
+                        $query=mysqli_query($conn,"SELECT nama_guru from tb_guru order by nip asc");
+                        while($row=mysqli_fetch_array($query))
+                        {
+                    ?>
+                        <option value="<?php  echo $row['nama_guru']; ?>"><?php  echo $row['nama_guru']; ?></option>
+                    <?php 
+                        }
+                ?>
+                </select>
+            </div>
+            <div class="form-group">
+            <label>Mata Pelajaran</label>
+                <select name="mapel" class="form-control" required>
+                    <option value="">Pilih Mata Pelajaran yg di bawakan</option>
+                    <?php 
+                        $query=mysqli_query($conn,"SELECT mapel from tb_guru order by nip asc");
+                        while($row=mysqli_fetch_array($query))
+                        {
+                    ?>
+                        <option value="<?php  echo $row['mapel']; ?>"><?php  echo $row['mapel']; ?></option>
+                    <?php 
+                        }
+                ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Jumlah Les</label>
+                <input type="text" class="form-control" name="les" required>
             </div>
         </div>
 
@@ -88,22 +131,25 @@
 
 <div class="row">
     <div class="col-lg-6">
-        <input type="submit" name="input" class="btn btn-default" value="Input"/>
+        <input type="submit" name="input" class="btn btn-success" value="Buat Jadwal"/>
     </div>
     </form>
 
     <!-- Script Input -->
     <?php
         if(@$_POST['input']){
-            $id_mengajar=$_POST['id_mengajar'];
+            $nip = $_POST['nip'];
+            $nama = $_POST['nama'];
+            $mapel = $_POST['mapel'];
             $hari=$_POST['hari'];
+            $jurusan=$_POST['jurusan'];
             $jam_mulai=$_POST['jam_mulai'];
             $jam_berakhir=$_POST['jam_berakhir'];
+            $les=$_POST['les'];
             $kelas=$_POST['kelas'];
             
-            $query=mysql_query("insert into tb_jadwal(id_mengajar, hari, jam_mulai, jam_berakhir, id_kelas) 
-                                values('$id_mengajar','$hari', '$jam_mulai', '$jam_berakhir',  '$kelas')") 
-                                or die (mysql_error());
+            $query=mysqli_query($conn,"insert into jadwal_guru(nip,nama_guru,mapel_dibawakan,jumlah_les,jam_mulai,jam_berakhir,hari,jurusan,kelas) 
+                                values('$nip','$nama', '$mapel', '$les', '$jam_mulai', '$jam_berakhir', '$hari', '$jurusan', '$kelas')") ;
             
             if($query){
             ?>

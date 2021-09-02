@@ -18,19 +18,19 @@
 
     <title>SI Absensi -- Tata Usaha</title>
 
-    <link rel="stylesheet" type="text/css"  href="/som/css/smart-forms.css">
+    <link rel="stylesheet" type="text/css"  href="../css/smart-forms.css">
 
     <!-- Bootstrap Core CSS -->
-    <link href="/som/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="/som/css/sb-admin.css" rel="stylesheet">
+    <link href="../css/sb-admin.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="/som/css/plugins/morris.css" rel="stylesheet">
+    <link href="../css/plugins/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="/som/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <style>
         .table th {
@@ -95,7 +95,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="/som/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="../logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -105,7 +105,7 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="/som/tatausaha/index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="./index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#roster"><i class="fa fa-fw fa-send"></i> Jadwal Pelajaran <i class="fa fa-fw fa-caret-down"></i></a>
@@ -151,23 +151,22 @@
         </div>
 
     </div>
-    <script src="/som/js/jquery.js"></script>
+    <script src="../js/jquery.js"></script>
 
-    <script type="text/javascript" src="/som/js/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="/som/js/jquery-ui-custom.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui-custom.min.js"></script>
 
-    <script src="/som/js/jfunc.js"></script>
+    <script src="../js/jfunc.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="/som/js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 
     <!-- Morris Charts JavaScript -->
-    <script src="/som/js/plugins/morris/raphael.min.js"></script>
-    <script src="/som/js/plugins/morris/morris.min.js"></script>
-    <script src="/som/js/plugins/morris/morris-data.js"></script>
-    <script src="js/responsive-tabs.js"></script>
+    <script src="../js/plugins/morris/raphael.min.js"></script>
+    <script src="../js/plugins/morris/morris.min.js"></script>
+    <script src="../js/plugins/morris/morris-data.js"></script>
+    <script src="../js/responsive-tabs.js"></script>
     <script type="text/javascript">
-
       $( 'ul.nav.nav-tabs  a' ).click( function ( e ) {
         e.preventDefault();
         $( this ).tab( 'show' );

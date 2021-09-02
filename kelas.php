@@ -1,3 +1,4 @@
+<?php  include "koneksi.php"; ?>
 <div class="row">
     <div class="col-lg-12" style="margin-top:-10px;">
         <h1 class="page-header">
@@ -34,7 +35,7 @@
         if(@$_POST['input']){
             $kelas=strtoupper($_POST['kelas']);
             
-            $query=mysql_query("insert into tb_kelas(kelas) values('$kelas')") or die (mysql_error());
+            $query=mysqli_query($conn,"insert into tb_kelas(kelas) values('$kelas')");
             
             if($query){
             ?>
@@ -63,7 +64,7 @@
         </h3>
         <div class="table-responsive">
             <?php
-                $view=mysql_query("select * from tb_kelas order by kelas asc");
+                $view=mysqli_query($conn,"select * from tb_kelas order by kelas asc");
                 $no=0;
             ?>
             <table class="table table-hover table-striped">
@@ -76,7 +77,7 @@
                 </thead>
                 <tbody>
                     <?php
-                        while($row=mysql_fetch_array($view)){
+                        while($row=mysqli_fetch_array($view)){
                     ?>
                     <tr>
                         <td><?php echo $no=$no+1; ?></td>

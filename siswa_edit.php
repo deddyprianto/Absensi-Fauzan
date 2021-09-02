@@ -1,3 +1,4 @@
+<?php   include "koneksi.php"; ?>
 <div class="row">
     <div class="col-lg-12" style="margin-top:-10px;">
         <h1 class="page-header">
@@ -28,8 +29,8 @@
     <!-- Sript ambil data -->
     <?php
         $id = $_GET['id'];
-        $qrykoreksi=mysql_query("select * from tb_siswa where id_siswa='$id'");
-        $data=mysql_fetch_object($qrykoreksi);
+        $qrykoreksi=mysqli_query($conn,"select * from tb_siswa where id_siswa='$id'");
+        $data=mysqli_fetch_object($qrykoreksi);
     ?>
     <form method="post">
         <div class="col-lg-6">
@@ -81,8 +82,8 @@
                 <select name="kelas" class="form-control" required>
                     <option value="">Pilih Kelas</option>
                     <?php 
-                        $query=mysql_query("select * from tb_kelas order by kelas asc");
-                        while($row=mysql_fetch_array($query))
+                        $query=mysqli_query($conn,"select * from tb_kelas order by kelas asc");
+                        while($row=mysqli_fetch_array($query))
                         {
                     ?>
                         <option value="<?php  echo $row['id_kelas']; ?>"><?php  echo $row['kelas']; ?></option>
@@ -114,9 +115,9 @@
         $no_ortu=strtoupper($_POST['no_ortu']);
         $kelas=strtoupper($_POST['kelas']);
         
-        $query=mysql_query("UPDATE tb_siswa SET nis='$nis', nama_siswa='$nama_siswa', jenis_kelamin='$jenis_kelamin',
+        $query=mysqli_query($conn,"UPDATE tb_siswa SET nis='$nis', nama_siswa='$nama_siswa', jenis_kelamin='$jenis_kelamin',
                             tempat_lahir='$tempat_lahir', tanggal_lahir='$tanggal_lahir', alamat='$alamat', agama='$agama',
-                            nama_ortu='$nama_ortu', no_ortu='$no_ortu', id_kelas='$kelas' WHERE id_siswa='$id'") or die (mysql_error());
+                            nama_ortu='$nama_ortu', no_ortu='$no_ortu', id_kelas='$kelas' WHERE id_siswa='$id'");
         
         if($query){
         ?>

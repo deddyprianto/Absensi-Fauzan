@@ -1,3 +1,4 @@
+<?php   include "koneksi.php"; ?>
 <div class="row">
     <div class="col-lg-12" style="margin-top:-10px;">
         <h1 class="page-header">
@@ -75,8 +76,9 @@
                 <select name="kelas" class="form-control" required>
                     <option value="">Pilih Kelas</option>
                     <?php 
-                        $query=mysql_query("select * from tb_kelas order by kelas asc");
-                        while($row=mysql_fetch_array($query))
+                   
+                        $query=mysqli_query($conn,"select * from tb_kelas order by kelas asc");
+                        while($row=mysqli_fetch_array($query))
                         {
                     ?>
                         <option value="<?php  echo $row['id_kelas']; ?>"><?php  echo $row['kelas']; ?></option>
@@ -117,7 +119,7 @@
 
         $tanggal_lahir = ubahformatTgl($tgl);
         
-        $query=mysql_query("insert into tb_siswa(nis, nama_siswa, jenis_kelamin, tempat_lahir, tanggal_lahir, alamat, agama, nama_ortu, no_ortu, id_kelas) values('$nis','$nama_siswa', '$jenis_kelamin',  '$tempat_lahir', '$tanggal_lahir', '$alamat', '$agama', '$nama_ortu', '$no_ortu', '$kelas')") or die (mysql_error());
+        $query=mysqli_query($conn,"insert into tb_siswa(nis, nama_siswa, jenis_kelamin, tempat_lahir, tanggal_lahir, alamat, agama, nama_ortu, no_ortu, id_kelas) values('$nis','$nama_siswa', '$jenis_kelamin',  '$tempat_lahir', '$tanggal_lahir', '$alamat', '$agama', '$nama_ortu', '$no_ortu', '$kelas')");
         
         if($query){
         ?>

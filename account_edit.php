@@ -1,3 +1,4 @@
+<?php  include "koneksi.php"; ?>
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
@@ -25,8 +26,8 @@
         <!-- Sript ambil data -->
         <?php
             $id = @$_GET['id'];
-            $qrykoreksi=mysql_query("select * from tb_pengguna where id_pengguna='$id'");
-            $data=mysql_fetch_array($qrykoreksi);
+            $qrykoreksi=mysqli_query($conn,"select * from tb_pengguna where id_pengguna='$id'");
+            $data=mysqli_fetch_array($qrykoreksi);
 
             if($data['status']=='guru'){
         ?>
@@ -64,7 +65,7 @@
             $username=$_POST['username'];
             $pass=$_POST['pass'];
             
-            $query=mysql_query("UPDATE tb_pengguna SET username='$username', pass='$pass'  WHERE id_pengguna='$id'") or die (mysql_error());
+            $query=mysqli_query($conn,"UPDATE tb_pengguna SET username='$username', pass='$pass'  WHERE id_pengguna='$id'");
             
             if($query){
                 ?>

@@ -61,7 +61,7 @@
                         <a href="#portfolio">Layanan Sistem</a>
                     </li>
                     <li>
-                        <a href="login.php">Log In</a>
+                        <a href="./login.php">Log In</a>
                     </li>
                 </ul>
             </div>

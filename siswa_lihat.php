@@ -1,3 +1,4 @@
+<?php   include "koneksi.php"; ?>
 <div class="row">
     <div class="col-lg-12" style="margin-top:-10px;">
         <h1 class="page-header">
@@ -27,11 +28,11 @@
 <div class="row">
     <div class="col-lg-12">
        <?php
-        $kelas1 = mysql_query("select * from tb_kelas");
+        $kelas1 = mysqli_query($conn,"select * from tb_kelas");
         ?>
         <ul class="nav nav-tabs responsive" id="myTab" style="margin-bottom:10px;">
             <?php
-                while($row1=mysql_fetch_array($kelas1)){
+                while($row1=mysqli_fetch_array($kelas1)){
             ?>
             <li class="test-class"><a class="deco-none misc-class" href="#<?php echo $row1['kelas']; ?>"> Kelas <?php echo $row1['kelas']; ?></a></li>
             <?php
@@ -45,12 +46,12 @@
     <div class="col-lg-12">
         <div class="tab-content responsive">
             <?php
-                $kelas2 = mysql_query("select * from tb_kelas");
-                while($row2=mysql_fetch_array($kelas2)){
+                $kelas2 = mysqli_query($conn,"select * from tb_kelas");
+                while($row2=mysqli_fetch_array($kelas2)){
                     $kelasid=$row2['id_kelas'];
 
-                    $siswa=mysql_query("select * from tb_siswa where id_kelas='$kelasid'");
-                    $jumlah=mysql_num_rows($siswa);
+                    $siswa=mysqli_query($conn,"select * from tb_siswa where id_kelas='$kelasid'");
+                    $jumlah=mysqli_num_rows($siswa);
             ?>
             <div class="tab-pane active" id="<?php echo $row2['kelas']; ?>">
                 <br>
@@ -72,7 +73,7 @@
                         </thead>
                         <tbody>
                             <?php
-                                while($row3=mysql_fetch_array($siswa)){
+                                while($row3=mysqli_fetch_array($siswa)){
                             ?>
                             <tr>
                                 <td><?php echo $row3['nis']; ?></td>

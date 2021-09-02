@@ -1,3 +1,4 @@
+<?php   include "koneksi.php"; ?>
 <div class="row">
     <div class="col-lg-12" style="margin-top:-10px;">
         <h1 class="page-header">
@@ -48,7 +49,7 @@
             $username=$_POST['username'];
             $pass=$_POST['pass'];
             
-            $query=mysql_query("insert into tb_pengguna(username, pass, status) values('$username','$pass','$status')") or die (mysql_error());
+            $query=mysqli_query($conn,"insert into tb_pengguna(username, pass, status) values('$username','$pass','$status')");
             
             if($query){
             ?>
@@ -74,7 +75,7 @@
         </h3>
         <div class="table-responsive">
             <?php
-                $view=mysql_query("select * from tb_pengguna order by username desc");
+                $view=mysqli_query($conn,"select * from tb_pengguna order by username desc");
                 $no=0;
             ?>
             <table class="table table-hover table-bordered table-striped">
@@ -89,7 +90,7 @@
                 </thead>
                 <tbody>
                     <?php
-                        while($row=mysql_fetch_array($view)){
+                        while($row=mysqli_fetch_array($view)){
                             if($row['status']=='guru'){
                     ?>
                     <tr>

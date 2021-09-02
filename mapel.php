@@ -1,4 +1,5 @@
 <!-- Heading -->
+<?php include "koneksi.php"; ?>
 <div class="row">
     <div class="col-lg-12" style="margin-top:-10px;">
         <h1 class="page-header">
@@ -39,8 +40,7 @@
         if(@$_POST['input']){
             $kode_mapel=strtoupper($_POST['kode_mapel']);
             $mapel=strtoupper($_POST['mapel']);
-            
-            $query=mysql_query("insert into tb_mapel(kode_mapel, mapel) values('$kode_mapel', '$mapel')") or die (mysql_error());
+            $query=mysqli_query($conn,"insert into tb_mapel(kode_mapel, mapel) values('$kode_mapel', '$mapel')");
             
             if($query){
             ?>
@@ -63,11 +63,11 @@
     </div>
     <div class="col-lg-7">
         <h3 class="page-header">
-            Tampil Data
+            Data Mata Pelajaran
         </h3>
         <div class="table-responsive">
             <?php
-                $view=mysql_query("select * from tb_mapel order by kode_mapel asc");
+                $view=mysqli_query($conn,"select * from tb_mapel order by kode_mapel asc");
                 $no=0;
 
             ?>
@@ -81,7 +81,7 @@
                 </thead>
                 <tbody>
                     <?php
-                        while($row=mysql_fetch_array($view)){
+                        while($row=mysqli_fetch_array($view)){
                     ?>
                     <tr>   
                         <td><?php echo $row['kode_mapel']; ?></td>
