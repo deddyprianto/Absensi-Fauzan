@@ -1,3 +1,4 @@
+<?php include "koneksi.php"; ?>
 <div class="row">
     <div class="col-lg-12" style="margin-top:-10px;">
         <h1 class="page-header">
@@ -28,66 +29,64 @@
     <!-- Sript ambil data -->
     <?php
         $id = @$_GET['id'];
-        $qrykoreksi=mysql_query("select * from tb_jadwal where id_jadwal='$id'");
-        $data=mysql_fetch_array($qrykoreksi);
+        $qrykoreksi=mysqli_query($conn,"select * from jadwal_guru where id_jadwal='$id'");
+        $data=mysqli_fetch_array($qrykoreksi);
     ?>
 
     <form method="post">
         <div class="col-lg-7">
             <div class="form-group">
-                <label>Hari</label>
-                <select name="hari" class="form-control" required>
-                    <option value"" selected="selected">Pilih Hari</option>
-                    <option value="Senin">Senin</option>
-                    <option value="Selasa">Selasa</option>
-                    <option value="Rabu">Rabu</option>
-                    <option value="Kamis">Kamis</option>
-                    <option value="Jumat">Jum'at</option>
-                    <option value="Sabtu">Sabtu</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Kelas</label>
-                <select name="kelas" class="form-control" required>
-                    <option value="" selected="selected">Pilih Kelas</option>
+                <label>NIP</label>
+                <select name="nip" class="form-control" required>
+                    <option value="">Pilih NIP Guru</option>
                     <?php 
-                        $query=mysql_query("select * from tb_kelas order by id_kelas asc");
-                        while($row=mysql_fetch_array($query))
+                        $query=mysqli_query($conn,"SELECT nip,nama_guru from tb_guru order by nip asc");
+                        while($row=$data)
                         {
                     ?>
-                        <option value="<?php  echo $row['id_kelas']; ?>"><?php  echo $row['kelas']; ?></option>
+                        <option value="<?php  echo $row['nip']; ?>"><?= $row['nip']; ?>--<?php  echo $row['nama_guru']; ?></option>
                     <?php 
                         }
                 ?>
                 </select>
             </div>
             <div class="form-group">
-                <label>Guru -- Mapel</label>
-                <select name="id_mengajar" class="form-control" required>
-                    <option value="" selected="selected">Guru -- Mapel</option>
+                <label>Nama Guru</label>
+                <select name="nama" class="form-control" required>
+                    <option value="">Pilih Nama Guru</option>
                     <?php 
-                        $query=mysql_query("select tb_guru.nama_guru, tb_mengajar.id_mengajar, tb_mapel.mapel from tb_guru, tb_mengajar, tb_mapel 
-                                            where tb_mengajar.kode_guru=tb_guru.kode_guru AND tb_mengajar.kode_mapel=tb_mapel.kode_mapel
-                                            order by tb_mengajar.kode_guru asc");
-                        while($row=mysql_fetch_array($query))
+                        $query=mysqli_query($conn,"SELECT nama_guru from tb_guru order by nip asc");
+                        while($row=$data)
                         {
                     ?>
-                        <option value="<?php  echo $row['id_mengajar']; ?>"><?php  echo $row['nama_guru']; ?> -- <?php  echo $row['mapel']; ?></option>
+                        <option value="<?php  echo $row['nama_guru']; ?>"><?php  echo $row['nama_guru']; ?></option>
                     <?php 
                         }
                 ?>
                 </select>
+            </div>
+            <div class="form-group">
+                <label>Mata Pelajaran</label>
+                <input type="time" class="form-control" name="mapel_dibawakan" value="<?php echo $data['mapel_dibawakan']; ?>" required>
             </div>
         </div>
 
         <div class="col-lg-5">
             <div class="form-group">
+                <label>Jumlah Les</label>
+                <input type="time" class="form-control" name="jumlah_les" value="<?php echo $data['jumlah_les']; ?>" required>
+            </div>
+            <div class="form-group">
                 <label>Jam Mulai</label>
                 <input type="time" class="form-control" name="jam_mulai" value="<?php echo $data['jam_mulai']; ?>" required>
             </div>
             <div class="form-group">
-                <label>Jam Selesai</label>
+                <label>Jam Berakhir</label>
                 <input type="time" class="form-control" name="jam_berakhir" value="<?php echo $data['jam_berakhir']; ?>" required>
+            </div>
+            <div class="form-group">
+                <label>Hari</label>
+                <input type="time" class="form-control" name="hari" value="<?php echo $data['hari']; ?>" required>
             </div>
         </div>
 </div>
@@ -106,8 +105,8 @@
             $jam_berakhir=$_POST['jam_berakhir'];
             $kelas=$_POST['kelas'];
 
-            $query=mysql_query("UPDATE tb_jadwal SET id_mengajar='$id_mengajar', hari='$hari', jam_mulai='$jam_mulai',
-                            jam_berakhir='$jam_berakhir', id_kelas='$kelas' WHERE id_jadwal='$id'") or die (mysql_error());
+            $query=mysqli_query($conn,"UPDATE tb_jadwal SET id_mengajar='$id_mengajar', hari='$hari', jam_mulai='$jam_mulai',
+                            jam_berakhir='$jam_berakhir', id_kelas='$kelas' WHERE id_jadwal='$id'");
 
             if($query){
             ?>

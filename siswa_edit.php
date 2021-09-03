@@ -45,9 +45,8 @@
             <div class="form-group">
                 <label>Jenis Kelamin</label>
                 <select name="jenis_kelamin" class="form-control" required>
-                    <option value="" selected="selected">Jenis Kelamin</option>
-                    <option value="Laki-laki">Laki-laki</option>
-                    <option value="Perempuan">Perempuan</option>
+                    <option value="Laki-laki" <?= ($data->jenis_kelamin === 'Laki-laki') ? 'selected' : ''?>>Laki-laki</option>
+                    <option value="Perempuan" <?= ($data->jenis_kelamin === 'Perempuan') ? 'selected' : ''?>>Perempuan</option>
                 </select>
             </div>
             <div class="form-group">
@@ -81,15 +80,9 @@
                 <label>Kelas</label>
                 <select name="kelas" class="form-control" required>
                     <option value="">Pilih Kelas</option>
-                    <?php 
-                        $query=mysqli_query($conn,"select * from tb_kelas order by kelas asc");
-                        while($row=mysqli_fetch_array($query))
-                        {
-                    ?>
-                        <option value="<?php  echo $row['id_kelas']; ?>"><?php  echo $row['kelas']; ?></option>
-                    <?php 
-                        }
-                ?>
+                    <option value="X" <?= ($data->kelas === 'X') ? 'selected' : ''?>>X</option>
+                    <option value="XI" <?= ($data->kelas === 'XI') ? 'selected' : ''?>>XI</option>
+                    <option value="XII" <?= ($data->kelas === 'XII') ? 'selected' : ''?>>XII</option>
                 </select>
             </div>
         </div>

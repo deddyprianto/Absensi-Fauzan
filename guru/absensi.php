@@ -43,14 +43,13 @@
                 $view=mysqli_query($conn,"select 
                                         tb_pengguna.username, 
                                         tb_guru.nama_guru,
-                                        tb_guru.mapel
+                                        tb_guru.jurusan
                                     from 
                                         tb_pengguna, 
                                         tb_guru
-                                    where 
-                                        tb_pengguna.username='$id_login' 
-                                        AND tb_pengguna.username=tb_guru.nip");
+                                    where tb_pengguna.username='$id_login' AND tb_pengguna.username=tb_guru.nip ");
                 $row=mysqli_fetch_array($view);
+
             ?>
             <div class="form-group">
                 <label>NIP</label>
@@ -61,8 +60,8 @@
                 <input name="guru" class="form-control" value="<?php echo $row['nama_guru']; ?>" readonly="readonly">
             </div>
             <div class="form-group">
-                <label>Mata Pelajaran</label>
-                <input name="mapel" class="form-control" placeholder="" value="<?= $row['mapel']; ?>" readonly="readonly">
+                <label>Mata Pelajaran yg Dibawakan</label>
+                <input name="jurusan" class="form-control" placeholder="" value="<?= $row['jurusan']; ?>" readonly="readonly">
             </div>
             <div class="form-group">
                 <label>Nama Siswa</label>
@@ -133,10 +132,12 @@
                             <?php
                                 $no++;
                                 }
-                            ?>
+                            ?> 
                         </tbody>
+
                     </table>
-                  
+                    <a class="btn btn-danger btn-shadow btn-sm" target="_blank" href="../cetakAbsensiPDF.php">Jadikan PDF</a>
+                    <a class="btn btn-success btn-shadow btn-sm" target="_blank" href="../cetakAbsensiExcel.php">Jadikan Excel</a>
     </div>
 </div>
 

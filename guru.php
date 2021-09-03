@@ -1,3 +1,4 @@
+<?php include "koneksi.php"; ?>
 <div class="row">
     <div class="col-lg-12" style="margin-top:-10px;">
         <h1 class="page-header">
@@ -21,7 +22,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h3 class="page-header" style="margin-top:-5px;">
-                Input Data Guru
+                Input Data Guru Baru
             </h3>
         </div>
     </div>
@@ -64,8 +65,8 @@
                 <input class="form-control" name="agama" placeholder="Agama" required>
             </div>
             <div class="form-group">
-                <label>Kode Guru</label>
-                <input class="form-control" name="kode_guru" placeholder="Kode Guru" required>
+                <label>Jurusan Guru</label>
+                <input class="form-control" name="jurusan" placeholder="Jurusan Guru" required>
             </div>
         </div>
     </div>
@@ -107,14 +108,13 @@
             $satukan = implode('-',$urutan);
             return $satukan;
         }
-
+        $nip=$_POST['nip'];
+        $nama_guru=strtoupper($_POST['nama_guru']);
+        $jenis_kelamin=strtoupper($_POST['jenis_kelamin']);
         $username=$_POST['username'];
         $pass=$_POST['pass'];
         $status='guru';
-        $nip=$_POST['nip'];
-        $nama_guru=strtoupper($_POST['nama_guru']);
-        $kode_guru=strtoupper($_POST['kode_guru']);
-        $jenis_kelamin=strtoupper($_POST['jenis_kelamin']);
+        $jurusan=strtoupper($_POST['jurusan']);
         $tempat_lahir=strtoupper($_POST['tempat_lahir']);
         $tgl=@$_POST['tanggal_lahir'];
         $alamat=strtoupper($_POST['alamat']);
@@ -124,11 +124,10 @@
 
         if($username==$nip){
         
-        $query1=mysql_query("insert into tb_pengguna(username, pass, status) values('$username','$pass', '$status')") or die (mysql_error());
+        $query1=mysqli_query($conn,"insert into tb_pengguna(username, pass, status) values('$username','$pass', '$status')");
 
-        $query=mysql_query("insert into tb_guru(nip, nama_guru, kode_guru, jenis_kelamin, tempat_lahir, tanggal_lahir, alamat, agama) 
-                            values('$nip','$nama_guru', '$kode_guru', '$jenis_kelamin',  '$tempat_lahir', '$tanggal_lahir', '$alamat', '$agama')") 
-                            or die (mysql_error());
+        $query=mysqli_query($conn,"insert into tb_guru(nip, nama_guru, jenis_kelamin, tempat_lahir, tanggal_lahir, alamat, agama,jurusan) 
+                            values('$nip','$nama_guru', '$jenis_kelamin',  '$tempat_lahir', '$tanggal_lahir', '$alamat', '$agama', '$jurusan')");
         
         if($query){
         ?>

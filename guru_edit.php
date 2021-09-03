@@ -50,11 +50,10 @@
             <div class="form-group">
                 <label>Jenis Kelamin</label>
                 <select name="jenis_kelamin" class="form-control">
-                    <option value="" selected="selected">Jenis Kelamin</option>
-                    <option value="Laki-laki">Laki-laki</option>
-                    <option value="Perempuan">Perempuan</option>
+                    <option value="Laki-laki" <?= ($data->jenis_kelamin === 'Laki-laki') ? 'selected' : ''?>>Laki-laki</option>
+                    <option value="Perempuan" <?= ($data->jenis_kelamin === 'Perempuan') ? 'selected' : ''?>>Perempuan</option>
                 </select>
-            </div>
+            </div>  
             <div class="form-group">
                 <label>Tempat Lahir</label>
                 <input class="form-control" name="tempat_lahir" value="<?php echo $data->tempat_lahir;?>" required>
@@ -63,12 +62,8 @@
 
         <div class="col-lg-6">
             <div class="form-group">
-                <label>Kode Guru</label>
-                <input class="form-control" name="kode_guru" value="<?php echo $data->kode_guru;?>" required>
-            </div>
-            <div class="form-group">
                 <label>Tanggal Lahir</label>
-                <input type="date" class="form-control" name="tanggal_lahir">
+                <input type="date" class="form-control" name="tanggal_lahir" value="<?php echo $data->tanggal_lahir;?>">
             </div>
             <div class="form-group">
                 <label>Alamat</label>
@@ -77,6 +72,10 @@
             <div class="form-group">
                 <label>Agama</label>
                 <input class="form-control" name="agama" value="<?php echo $data->agama;?>" required>
+            </div>
+            <div class="form-group">
+                <label>Pelajaran</label>
+                <input class="form-control" name="jurusan" value="<?php echo $data->jurusan;?>" required>
             </div>
         </div>
 </div>
@@ -91,16 +90,16 @@
     <?php 
     if(@$_POST['edit']){
         $nip=$_POST['nip'];
-        $nama_guru=strtoupper($_POST['nama_guru']);
-        $kode_guru=strtoupper($_POST['kode_guru']);
-        $jenis_kelamin=strtoupper($_POST['jenis_kelamin']);
-        $tempat_lahir=strtoupper($_POST['tempat_lahir']);
-        $tanggal_lahir=@$_POST['tanggal_lahir'];
-        $alamat=strtoupper($_POST['alamat']);
-        $agama=strtoupper($_POST['agama']);
-        
-        $query=mysqli_query($conn,"UPDATE tb_guru SET nip='$nip', nama_guru='$nama_guru', kode_guru='$kode_guru', jenis_kelamin='$jenis_kelamin', tempat_lahir='$tempat_lahir',
-                            tanggal_lahir='$tanggal_lahir', alamat='$alamat', agama='$agama' WHERE id_guru='$id'");
+        $nama_guru=$_POST['nama_guru'];
+        $jenis_kelamin=$_POST['jenis_kelamin'];
+        $tempat_lahir=$_POST['tempat_lahir'];
+        $tanggal_lahir=$_POST['tanggal_lahir'];
+        $alamat=$_POST['alamat'];
+        $agama=$_POST['agama'];
+        $jurusan=$_POST['jurusan'];
+        $query=mysqli_query($conn,"UPDATE tb_guru SET nip='$nip', nama_guru='$nama_guru', jenis_kelamin='$jenis_kelamin', tempat_lahir='$tempat_lahir',
+                            tanggal_lahir='$tanggal_lahir', alamat='$alamat', agama='$agama', jurusan='$jurusan' WHERE id_guru='$id'");
+
         $query1=mysqli_query($conn,"UPDATE tb_pengguna SET username='$nip' where id_pengguna='$b->id_pengguna'");
         if($query){
         ?>
