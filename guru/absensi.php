@@ -76,9 +76,12 @@
                     <option value="XII">XII</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label>Jurusan</label>
-                <input name="jurusan" class="form-control" placeholder="masukkan jurusan">
+            <div class="form-group" style="margin-top: 30px;">
+                <select class="form-control" name="kelas">
+                    <option selected>Pilih Jurusan</option>
+                    <option value="IPA">IPA</option>
+                    <option value="IPS">IPS</option>
+                </select>
             </div>
             <div class="form-group" style="margin-top: 30px;">
                 <select class="form-control" name="status">

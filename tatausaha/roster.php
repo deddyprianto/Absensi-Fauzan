@@ -51,7 +51,7 @@ include './koneksi.php';
                         while($row=mysqli_fetch_array($query))
                         {
                     ?>
-                        <option value="<?php  echo $row['id_kelas']; ?>"><?php  echo $row['kelas']; ?></option>
+                        <option value="<?php  echo $row['kelas']; ?>"><?php  echo $row['kelas']; ?></option>
                     <?php 
                         }
                 ?>
@@ -79,7 +79,7 @@ include './koneksi.php';
                     <?php 
                         }
                 ?>
-                </select>
+                </select>   
             </div>
             <div class="form-group">
             <label>Nama Guru</label>
@@ -99,9 +99,9 @@ include './koneksi.php';
             <div class="form-group">
             <label>Mata Pelajaran</label>
                 <select name="mapel" class="form-control" required>
-                    <option value="">Pilih Mata Pelajaran yg di bawakan</option>
+                    <option value="">Pilih Mata Pelajaran yg di Bawakan</option>
                     <?php 
-                        $query=mysqli_query($conn,"SELECT mapel from tb_guru order by nip asc");
+                        $query=mysqli_query($conn,"SELECT mapel from tb_mapel");
                         while($row=mysqli_fetch_array($query))
                         {
                     ?>
@@ -113,7 +113,7 @@ include './koneksi.php';
             </div>
             <div class="form-group">
                 <label>Jumlah Les</label>
-                <input type="text" class="form-control" name="les" required>
+                <input type="number" class="form-control" name="les" required>
             </div>
         </div>
 

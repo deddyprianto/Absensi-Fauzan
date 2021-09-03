@@ -95,7 +95,7 @@
                                 $view2=mysqli_query($conn,"select nama_guru, mapel_dibawakan, jumlah_les,kelas,jam_mulai,jam_berakhir,jurusan
                                                     from jadwal_guru where hari='Selasa' AND nip='$id_login' order by jam_mulai asc");
                                 $no=1;
-                                while($raw2=mysqli_fetch_array($view2)){
+                                while($raw2=mysqli_fetch_array($view2)){    
                             ?>
                            <tr class="success">
                                 <td><?php echo $no; ?></td>

@@ -2,7 +2,7 @@
 include "koneksi.php";
 $kode = @$_GET['id'];
 
-mysql_query("delete from tb_kelas where id_kelas = '$kode'") or die (mysql_error());
+mysqli_query($conn,"delete from tb_kelas where id_kelas = '$kode'");
 ?>
 <script type="text/javascript">
 alert("Data berhasil dihapus")

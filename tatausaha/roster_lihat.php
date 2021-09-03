@@ -55,7 +55,7 @@
                                 <td><?php echo $raw2['hari']; ?></td>
                                 <td><?php echo $raw2['jurusan']; ?></td>
                                 <td><?php echo $raw2['kelas']; ?></td>
-                                <td><i><a href="?page=roster_edit&id=<?php echo $raw2['id'];?>">Edit</a> / <a onclick="return confirm('Yakin akan hapus data ini ?')" href="roster_hapus.php?id=<?php echo $raw2['id'];?>">Hapus</a></i></td>
+                                <td><i><a href="?page=editroster&id=<?php echo $raw2['id'];?>">Edit</a> / <a onclick="return confirm('Yakin akan hapus data ini ?')" href="roster_hapus.php?id=<?php echo $raw2['id'];?>">Hapus</a></i></td>
                             </tr>
                             <?php
                                 $no++;
@@ -101,7 +101,7 @@
                                 <td><?php echo $raw2['hari']; ?></td>
                                 <td><?php echo $raw2['jurusan']; ?></td>
                                 <td><?php echo $raw2['kelas']; ?></td>
-                                <td><i><a href="?page=editguru&id=<?php echo $raw2['id'];?>">Edit</a> / <a onclick="return confirm('Yakin akan hapus data ini ?')" href="guru_hapus.php?id=<?php echo $raw2['id'];?>">Hapus</a></i></td>
+                                <td><i><a href="?page=editroster&id=<?php echo $raw2['id'];?>">Edit</a> / <a onclick="return confirm('Yakin akan hapus data ini ?')" href="roster_hapus.php?id=<?php echo $raw2['id'];?>">Hapus</a></i></td>
                             </tr>
                             <?php
                                 $no++;
@@ -147,7 +147,7 @@
                                 <td><?php echo $raw2['hari']; ?></td>
                                 <td><?php echo $raw2['jurusan']; ?></td>
                                 <td><?php echo $raw2['kelas']; ?></td>
-                                <td><i><a href="?page=editguru&id=<?php echo $raw2['id'];?>">Edit</a> / <a onclick="return confirm('Yakin akan hapus data ini ?')" href="guru_hapus.php?id=<?php echo $raw2['id'];?>">Hapus</a></i></td>
+                                <td><i><a href="?page=editroster&id=<?php echo $raw2['id'];?>">Edit</a> / <a onclick="return confirm('Yakin akan hapus data ini ?')" href="roster_hapus.php?id=<?php echo $raw2['id'];?>">Hapus</a></i></td>
                             </tr>
                             <?php
                                 $no++;
