@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Sep 2021 pada 16.55
+-- Waktu pembuatan: 04 Sep 2021 pada 13.20
 -- Versi server: 10.1.36-MariaDB
 -- Versi PHP: 7.2.10
 
@@ -69,20 +69,6 @@ CREATE TABLE `jadwal_guru` (
   `kelas` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `jadwal_guru`
---
-
-INSERT INTO `jadwal_guru` (`id`, `nip`, `nama_guru`, `mapel_dibawakan`, `jumlah_les`, `jam_mulai`, `jam_berakhir`, `hari`, `jurusan`, `kelas`) VALUES
-(7, '16102001', 'Ir.Hj.Nursiah Abe', 'FISIKA', 3, '10.30', '12.00', 'Rabu', 'IPA', 'XII'),
-(8, '16102002', 'Mustika Ayu,S.Pd', 'MATEMATIKA', 3, '07.30', '10.00', 'Rabu', 'IPA', 'X'),
-(9, '16102001', 'Ir.Hj.Nursiah Abe', 'FISIKA', 2, '10.30', '12.00', 'Kamis', 'IPA', 'X'),
-(10, '16102002', 'Mustika Ayu,S.Pd', 'MATEMATIKA', 2, '10.30', '12.00', 'Kamis', 'IPS', 'XII'),
-(11, '16102001', 'Ir.Hj.Nursiah Abe', 'FISIKA', 2, '10.30', '11.30', 'Sabtu', 'IPA', 'XI'),
-(12, '16102003', 'Leli Ardiana,S.Pd.I', 'PENDIDIKAN AGAMA ISLAM', 3, '10.30', '12.00', 'Senin', 'IPS', 'X'),
-(13, '16102004', 'Zuhri Arif,SH.,MH', 'KE AL WASHLIYAHAN', 2, '07.30', '08.30', 'Selasa', 'IPS', 'XI'),
-(14, '16102007', 'Dewi Ayu Sophia,S.Pd', 'Ekonomi', 2, '09:47', '12:00', 'Jumat', 'IPA', 'X');
-
 -- --------------------------------------------------------
 
 --
@@ -99,15 +85,15 @@ CREATE TABLE `tb_guru` (
   `tanggal_lahir` date NOT NULL,
   `alamat` varchar(100) NOT NULL,
   `agama` varchar(20) NOT NULL,
-  `mapel` varchar(255) NOT NULL
+  `jurusan` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_guru`
 --
 
-INSERT INTO `tb_guru` (`id_guru`, `nip`, `nama_guru`, `kode_guru`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `agama`, `mapel`) VALUES
-(9, '16102001', 'Ir.Hj.Nursiah Abe', 'A', 'Perempuan', 'CIBUBUR', '1963-07-03', 'TASIKMALAYA', 'ISLAM', 'Fisika'),
+INSERT INTO `tb_guru` (`id_guru`, `nip`, `nama_guru`, `kode_guru`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `agama`, `jurusan`) VALUES
+(9, '16102001', 'Ir.Hj.Nursiah Abe', 'A', 'Perempuan', 'CIBUBUR ', '1963-07-03', 'TASIKMALAYA', 'HINDU', 'Fisika'),
 (10, '16102002', 'Mustika Ayu,S.Pd', 'B', 'Perempuan', 'GARUT', '1968-08-15', 'TASIKMALAYA', 'ISLAM', 'Matematika'),
 (11, '16102003', 'Leli Ardiana,S.Pd.I', 'C', 'Perempuan', 'GARUT', '1967-10-15', 'TASIKMALAYA', 'ISLAM', 'Pendidikan Agama Islam'),
 (12, '16102004', 'Zuhri Arif,SH.,MH', 'D', 'Laki-laki', 'BOGOR', '1958-02-07', 'TASIKMALAYA', 'ISLAM', 'Ke Al Washliyahan'),
@@ -165,7 +151,7 @@ CREATE TABLE `tb_mapel` (
 --
 
 INSERT INTO `tb_mapel` (`id_mapel`, `kode_mapel`, `mapel`) VALUES
-(8, '01', 'FISIKA'),
+(8, '01', 'FISIKA QUANTUM'),
 (9, '02', 'PENDIDIKAN KEWARGANERAAN'),
 (10, '03', 'BAHASA INDONESIA'),
 (11, '04', 'MATEMATIKA'),
@@ -246,23 +232,23 @@ CREATE TABLE `tb_siswa` (
   `agama` varchar(10) NOT NULL,
   `nama_ortu` varchar(40) NOT NULL,
   `no_ortu` varchar(15) NOT NULL,
-  `id_kelas` int(3) NOT NULL
+  `kelas` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_siswa`
 --
 
-INSERT INTO `tb_siswa` (`id_siswa`, `nis`, `nama_siswa`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `agama`, `nama_ortu`, `no_ortu`, `id_kelas`) VALUES
-(1, '13001', 'ANDI MUH RIFQI', 'LAKI-LAKI', 'MAKASSAR', '2003-12-04', 'TASIKMALAYA', 'ISLAM', 'MUSKAR', '08123456789', 14),
-(3, '13002', 'DZULFAQQOR AMIN', 'LAKI-LAKI', 'JAKARTA', '2004-12-22', 'TASIKMALAYA', 'ISLAM', 'ARPEN', '08345678901', 14),
-(4, '13003', 'MUH. AMMAR', 'LAKI-LAKI', 'MAKASSAR', '2004-10-16', 'TASIKMALAYA', 'ISLAM', 'RUSYDAH', '+628123456789', 14),
-(11, '13004', 'RAVI SOFYAN', 'LAKI-LAKI', 'TASIKMALAYA', '2016-02-29', 'TASIKMALAYA', 'ISLAM', 'MR', '3653786428', 14),
-(12, '13102001', 'ADITYA WIBOWO', 'PEREMPUAN', 'CILACAP', '2016-03-31', 'JALAN KENANGAN', 'ISLAM', 'MUCHLIS', '085434567281', 14),
-(2, '14001', 'PRADIKA DESTARINI', 'PEREMPUAN', 'PURBALINGGA', '2004-12-11', 'TASIKMALAYA', 'ISLAM', 'RINI', '08234567890', 13),
-(7, '14002', 'CALVIN SUTOYO', 'LAKI-LAKI', 'PADANG, SUMATERA BAR', '2005-01-05', 'TASIKMALAYA', 'ISLAM', 'SUTOYO HADININGRAT', '+6254447474', 13),
-(5, '15001', 'HARUN AR-RASYID', 'LAKI-LAKI', 'MANILA', '2005-10-15', 'TASIKMALAYA', 'ISLAM', 'RASYID AL-HIKMAH', '+624545657778', 12),
-(6, '15002', 'JUNETY', 'PEREMPUAN', 'JAKARTA', '2005-08-08', 'TASIKMALAYA', 'ISLAM', 'MOH.SAIPUDIN', '+6251514578', 12);
+INSERT INTO `tb_siswa` (`id_siswa`, `nis`, `nama_siswa`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `agama`, `nama_ortu`, `no_ortu`, `kelas`) VALUES
+(1, '13001', 'ANDI MUH RIFQI RIZAL', 'LAKI-LAKI', 'MAKASSAR', '2021-09-23', 'TASIKMALAYA', 'ISLAM', 'MUSKAR', '08123456789', 'X'),
+(3, '13002', 'DZULFAQQOR AMIN', 'LAKI-LAKI', 'JAKARTA', '2004-12-22', 'TASIKMALAYA', 'ISLAM', 'ARPEN', '08345678901', 'XII'),
+(4, '13003', 'MUH. AMMAR', 'LAKI-LAKI', 'MAKASSAR', '2004-10-16', 'TASIKMALAYA', 'ISLAM', 'RUSYDAH', '+628123456789', 'XI'),
+(11, '13004', 'RAVI SOFYAN', 'LAKI-LAKI', 'TASIKMALAYA', '2016-02-29', 'TASIKMALAYA', 'ISLAM', 'MR', '3653786428', 'X'),
+(12, '13102001', 'ADITYA WIBOWO', 'PEREMPUAN', 'CILACAP', '2016-03-31', 'JALAN KENANGAN', 'ISLAM', 'MUCHLIS', '085434567281', 'X'),
+(2, '14001', 'PRADIKA DESTARINI', 'PEREMPUAN', 'PURBALINGGA', '2004-12-11', 'TASIKMALAYA', 'ISLAM', 'RINI', '08234567890', 'X'),
+(7, '14002', 'CALVIN SUTOYO', 'LAKI-LAKI', 'PADANG, SUMATERA BAR', '2005-01-05', 'TASIKMALAYA', 'ISLAM', 'SUTOYO HADININGRAT', '+6254447474', 'XI'),
+(5, '15001', 'HARUN AR-RASYID', 'LAKI-LAKI', 'MANILA', '2005-10-15', 'TASIKMALAYA', 'ISLAM', 'RASYID AL-HIKMAH', '+624545657778', 'XII'),
+(6, '15002', 'JUNETY', 'PEREMPUAN', 'JAKARTA', '2005-08-08', 'TASIKMALAYA', 'ISLAM', 'MOH.SAIPUDIN', '+6251514578', 'X');
 
 --
 -- Indexes for dumped tables
@@ -323,9 +309,7 @@ ALTER TABLE `tb_pengguna`
 --
 ALTER TABLE `tb_siswa`
   ADD PRIMARY KEY (`nis`),
-  ADD UNIQUE KEY `id_siswa` (`id_siswa`),
-  ADD KEY `id_kelas` (`id_kelas`),
-  ADD KEY `id_kelas_2` (`id_kelas`);
+  ADD UNIQUE KEY `id_siswa` (`id_siswa`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -341,7 +325,7 @@ ALTER TABLE `hasil_absensi`
 -- AUTO_INCREMENT untuk tabel `jadwal_guru`
 --
 ALTER TABLE `jadwal_guru`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_guru`
@@ -371,25 +355,7 @@ ALTER TABLE `tb_pengguna`
 -- AUTO_INCREMENT untuk tabel `tb_siswa`
 --
 ALTER TABLE `tb_siswa`
-  MODIFY `id_siswa` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
---
-
---
--- Ketidakleluasaan untuk tabel `jadwal_guru`
---
-ALTER TABLE `jadwal_guru`
-  ADD CONSTRAINT `jadwal_guru_ibfk_1` FOREIGN KEY (`mapel_dibawakan`) REFERENCES `tb_mapel` (`mapel`),
-  ADD CONSTRAINT `jadwal_guru_ibfk_4` FOREIGN KEY (`nama_guru`) REFERENCES `tb_guru` (`nama_guru`),
-  ADD CONSTRAINT `jadwal_guru_ibfk_5` FOREIGN KEY (`nip`) REFERENCES `tb_guru` (`nip`);
-
---
--- Ketidakleluasaan untuk tabel `tb_siswa`
---
-ALTER TABLE `tb_siswa`
-  ADD CONSTRAINT `tb_siswa_ibfk_1` FOREIGN KEY (`id_kelas`) REFERENCES `tb_kelas` (`id_kelas`) ON UPDATE CASCADE;
+  MODIFY `id_siswa` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
