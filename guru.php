@@ -65,8 +65,8 @@
                 <input class="form-control" name="agama" placeholder="Agama" required>
             </div>
             <div class="form-group">
-                <label>Jurusan Guru</label>
-                <input class="form-control" name="jurusan" placeholder="Jurusan Guru" required>
+                <label>Mapel Guru</label>
+                <input class="form-control" name="mapel" placeholder="Jurusan Guru" required>
             </div>
         </div>
     </div>
@@ -114,7 +114,7 @@
         $username=$_POST['username'];
         $pass=$_POST['pass'];
         $status='guru';
-        $jurusan=strtoupper($_POST['jurusan']);
+        $mapel=strtoupper($_POST['mapel']);
         $tempat_lahir=strtoupper($_POST['tempat_lahir']);
         $tgl=@$_POST['tanggal_lahir'];
         $alamat=strtoupper($_POST['alamat']);
@@ -126,8 +126,8 @@
         
         $query1=mysqli_query($conn,"insert into tb_pengguna(username, pass, status) values('$username','$pass', '$status')");
 
-        $query=mysqli_query($conn,"insert into tb_guru(nip, nama_guru, jenis_kelamin, tempat_lahir, tanggal_lahir, alamat, agama,jurusan) 
-                            values('$nip','$nama_guru', '$jenis_kelamin',  '$tempat_lahir', '$tanggal_lahir', '$alamat', '$agama', '$jurusan')");
+        $query=mysqli_query($conn,"insert into tb_guru(nip, nama_guru, jenis_kelamin, tempat_lahir, tanggal_lahir, alamat, agama,mapel) 
+                            values('$nip','$nama_guru', '$jenis_kelamin',  '$tempat_lahir', '$tanggal_lahir', '$alamat', '$agama', '$mapel')");
         
         if($query){
         ?>

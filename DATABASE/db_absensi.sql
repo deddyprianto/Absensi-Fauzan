@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 04 Sep 2021 pada 13.20
+-- Waktu pembuatan: 05 Sep 2021 pada 16.23
 -- Versi server: 10.1.36-MariaDB
 -- Versi PHP: 7.2.10
 
@@ -48,7 +48,8 @@ CREATE TABLE `hasil_absensi` (
 INSERT INTO `hasil_absensi` (`id`, `tanggal`, `hari`, `nip`, `nama_guru`, `mapel`, `nama_siswa`, `kelas`, `jurusan`, `status_kehadiran`) VALUES
 (5, '2021-09-08', 'Rabu', '16002345', 'Munarudin', 'Matematika', 'Arif', 'X', 'IPA', 'Sakit'),
 (6, '2021-09-08', 'Rabu', '123123', 'asdasd', 'Sejarah', 'Dedy', 'XI', 'IPS', 'Hadir'),
-(7, '2021-09-08', 'Kamis', '16002345', 'Munaroh', 'Fisika', 'Maniak', 'XII', 'IPS', 'Izin');
+(7, '2021-09-08', 'Kamis', '16002345', 'Munaroh', 'Fisika', 'Maniak', 'XII', 'IPS', 'Izin'),
+(8, ' 05-09-2021', 'Minggu', '16102001', 'Ir.Hj.Nursiah Abe', 'Fisika', 'Adam Malik', 'X', 'IPA', 'Hadir');
 
 -- --------------------------------------------------------
 
@@ -69,6 +70,18 @@ CREATE TABLE `jadwal_guru` (
   `kelas` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `jadwal_guru`
+--
+
+INSERT INTO `jadwal_guru` (`id`, `nip`, `nama_guru`, `mapel_dibawakan`, `jumlah_les`, `jam_mulai`, `jam_berakhir`, `hari`, `jurusan`, `kelas`) VALUES
+(1, '16102001', 'Ir.Hj.Nursiah Abe', 'FISIKA QUANTUM', 2, '22:18', '22:18', 'Selasa', 'IPA', 'X'),
+(2, '16102003', 'Leli Ardiana,S.Pd.I', 'ILMU PENGETAHUAN SOSIAL', 2, '23:18', '20:18', 'Jumat', 'IPS', 'XI'),
+(3, '16102005', 'Dra.Susiana Sari', 'SEJARAH', 2, '22:19', '22:19', 'Rabu', 'IPS', 'X'),
+(4, '16102003', 'Leli Ardiana,S.Pd.I', 'PENDIDIKAN KEWARGANERAAN', 2, '22:51', '22:51', 'Senin', 'IPA', 'XII'),
+(5, '16102004', 'Zuhri Arif,SH.,MH', 'PENDIDIKAN AGAMA ISLAM', 2, '20:53', '20:54', 'Selasa', 'IPA', 'XI'),
+(6, '16102004', 'Zuhri Arif,SH.,MH', 'PENDIDIKAN KEWARGANERAAN', 2, '20:56', '20:57', 'Rabu', 'IPS', 'XII');
+
 -- --------------------------------------------------------
 
 --
@@ -79,40 +92,40 @@ CREATE TABLE `tb_guru` (
   `id_guru` int(3) NOT NULL,
   `nip` varchar(10) NOT NULL,
   `nama_guru` varchar(255) NOT NULL,
-  `kode_guru` varchar(5) NOT NULL,
   `jenis_kelamin` varchar(15) NOT NULL,
   `tempat_lahir` varchar(20) NOT NULL,
   `tanggal_lahir` date NOT NULL,
   `alamat` varchar(100) NOT NULL,
   `agama` varchar(20) NOT NULL,
-  `jurusan` varchar(255) NOT NULL
+  `mapel` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_guru`
 --
 
-INSERT INTO `tb_guru` (`id_guru`, `nip`, `nama_guru`, `kode_guru`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `agama`, `jurusan`) VALUES
-(9, '16102001', 'Ir.Hj.Nursiah Abe', 'A', 'Perempuan', 'CIBUBUR ', '1963-07-03', 'TASIKMALAYA', 'HINDU', 'Fisika'),
-(10, '16102002', 'Mustika Ayu,S.Pd', 'B', 'Perempuan', 'GARUT', '1968-08-15', 'TASIKMALAYA', 'ISLAM', 'Matematika'),
-(11, '16102003', 'Leli Ardiana,S.Pd.I', 'C', 'Perempuan', 'GARUT', '1967-10-15', 'TASIKMALAYA', 'ISLAM', 'Pendidikan Agama Islam'),
-(12, '16102004', 'Zuhri Arif,SH.,MH', 'D', 'Laki-laki', 'BOGOR', '1958-02-07', 'TASIKMALAYA', 'ISLAM', 'Ke Al Washliyahan'),
-(13, '16102005', 'Dra.Susiana Sari', 'E', 'Perempuan', 'JAKARTA', '1976-12-12', 'TASIKMALAYA', 'ISLAM', 'Bahasa Indonesia'),
-(14, '16102006', 'Ismail,SH', 'F', 'Laki-laki', 'JAKARTA', '1990-11-02', 'TASIKMALAYA', 'ISLAM', 'Sosiologi'),
-(15, '16102007', 'Dewi Ayu Sophia,S.Pd', 'G', 'Perempuan', 'SEMARANG', '1988-01-20', 'TASIKMALAYA', 'ISLAM', 'Matematika'),
-(17, '16102008', 'Fauziah Nur Batubara,S.Pd', 'H', 'Perempuan', 'MAKASSAR', '1988-07-17', 'TASIKMALAYA', 'ISLAM', 'Kimia'),
-(18, '16102009', 'Rini Humairah,SE', 'I', 'Perempuan', 'BOGOR', '1978-12-12', 'TASIKMALAYA', 'ISLAM', 'Ekonomi'),
-(19, '16102010', 'Safwan,S.Pd.I.,M.Pd.I', 'J', 'Laki-laki', 'TASIKMALAYA', '1975-10-10', 'TASIKMALAYA', 'ISLAM', 'Pkn'),
-(20, '16102011', 'Yulia Rahmadhani,S.Pd., M.Hum', 'K', 'Perempuan', 'GARUT', '1985-04-22', 'TASIKMALAYA', 'ISLAM', 'Bahasa Inggris'),
-(21, '16102012', 'Evo Hidayat,S.Pd', 'L', 'Laki-laki', 'TASIKMALAYA', '1963-11-11', 'TASIKMALAYA', 'ISLAM', 'Bahasa Indonesia'),
-(22, '16102013', 'Gunawan Edi Utama,S.Si', 'M', 'Laki-laki', 'CIBUBUR', '1988-12-20', 'TASIKMALAYA', 'ISLAM', 'Biologi'),
-(23, '16102014', 'Desi Ariani Pulungan,S.Pd', 'N', 'Perempuan', 'BOGOR', '1969-07-18', 'TASIKMALAYA', 'ISLAM', 'Sejarah.P'),
-(24, '16102015', 'Muhajirin Anshori,S.Pd.I.,M.Pd', 'O', 'Laki-laki', 'JAKARTA', '1989-07-15', 'TASIKMALAYA', 'ISLAM', 'Pend Agama Islam'),
-(25, '16102016', 'M. Padlan Lubis,S.Si', 'P', 'Laki-laki', 'JAKARTA', '1990-12-11', 'TASIKMALAYA', 'ISLAM', 'Prakarya'),
-(26, '16102017', 'Riza Hayati Lubis,S.Pd', 'Q', 'Perempuan', 'TASIKMALAYA', '1990-05-06', 'TASIKMALAYA', 'ISLAM', 'Geografi'),
-(27, '16102018', 'Bayu Perdana,S.Pd', 'R', 'Laki-laki', 'GARUT', '1986-08-13', 'TASIKMALAYA', 'ISLAM', 'PJOK'),
-(30, '16102019', 'Munawar,S.Pd', 'Y', 'Laki-Laki', 'ASD', '2021-09-08', 'ASD', 'ASD', 'Sejarah'),
-(29, '16102020', 'M.Rizali,S.Pd.,M.Sn', 'Z', 'Laki-Laki', 'ASD', '2021-09-13', 'ASD', 'ASD', 'Seni Budaya');
+INSERT INTO `tb_guru` (`id_guru`, `nip`, `nama_guru`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `agama`, `mapel`) VALUES
+(9, '16102001', 'Ir.Hj.Nursiah Abe', 'Perempuan', 'CIBUBUR ', '1963-07-03', 'TASIKMALAYA', 'HINDU', 'Fisika'),
+(10, '16102002', 'Mustika Ayu,S.Pd', 'Perempuan', 'GARUT', '1968-08-15', 'TASIKMALAYA', 'ISLAM', 'Matematika'),
+(11, '16102003', 'Leli Ardiana,S.Pd.I', 'Perempuan', 'GARUT', '1967-10-15', 'TASIKMALAYA', 'ISLAM', 'Pendidikan Agama Islam'),
+(12, '16102004', 'Zuhri Arif,SH.,MH', 'Laki-laki', 'BOGOR', '1958-02-07', 'TASIKMALAYA', 'ISLAM', 'Ke Al Washliyahan'),
+(13, '16102005', 'Dra.Susiana Sari', 'Perempuan', 'JAKARTA', '1976-12-12', 'TASIKMALAYA', 'ISLAM', 'Bahasa Indonesia'),
+(14, '16102006', 'Ismail,SH', 'Laki-laki', 'JAKARTA', '1990-11-02', 'TASIKMALAYA', 'ISLAM', 'Sosiologi'),
+(15, '16102007', 'Dewi Ayu Sophia,S.Pd', 'Perempuan', 'SEMARANG', '1988-01-20', 'TASIKMALAYA', 'ISLAM', 'Matematika'),
+(17, '16102008', 'Fauziah Nur Batubara,S.Pd', 'Perempuan', 'MAKASSAR', '1988-07-17', 'TASIKMALAYA', 'ISLAM', 'Kimia'),
+(18, '16102009', 'Rini Humairah,SE', 'Perempuan', 'BOGOR', '1978-12-12', 'TASIKMALAYA', 'ISLAM', 'Ekonomi'),
+(19, '16102010', 'Safwan,S.Pd.I.,M.Pd.I', 'Laki-laki', 'TASIKMALAYA', '1975-10-10', 'TASIKMALAYA', 'ISLAM', 'Pkn'),
+(20, '16102011', 'Yulia Rahmadhani,S.Pd., M.Hum', 'Perempuan', 'GARUT', '1985-04-22', 'TASIKMALAYA', 'ISLAM', 'Bahasa Inggris'),
+(21, '16102012', 'Evo Hidayat,S.Pd', 'Laki-laki', 'TASIKMALAYA', '1963-11-11', 'TASIKMALAYA', 'ISLAM', 'Bahasa Indonesia'),
+(22, '16102013', 'Gunawan Edi Utama,S.Si', 'Laki-laki', 'CIBUBUR', '1988-12-20', 'TASIKMALAYA', 'ISLAM', 'Biologi'),
+(23, '16102014', 'Desi Ariani Pulungan,S.Pd', 'Perempuan', 'BOGOR', '1969-07-18', 'TASIKMALAYA', 'ISLAM', 'Sejarah.P'),
+(24, '16102015', 'Muhajirin Anshori,S.Pd.I.,M.Pd', 'Laki-laki', 'JAKARTA', '1989-07-15', 'TASIKMALAYA', 'ISLAM', 'Pend Agama Islam'),
+(25, '16102016', 'M. Padlan Lubis,S.Si', 'Laki-laki', 'JAKARTA', '1990-12-11', 'TASIKMALAYA', 'ISLAM', 'Prakarya'),
+(26, '16102017', 'Riza Hayati Lubis,S.Pd', 'Perempuan', 'TASIKMALAYA', '1990-05-06', 'TASIKMALAYA', 'ISLAM', 'Geografi'),
+(27, '16102018', 'Bayu Perdana,S.Pd', 'Laki-laki', 'GARUT', '1986-08-13', 'TASIKMALAYA', 'ISLAM', 'PJOK'),
+(30, '16102019', 'Munawar,S.Pd', 'Laki-Laki', 'ASD', '2021-09-08', 'ASD', 'ASD', 'Sejarah'),
+(29, '16102020', 'M.Rizali,S.Pd.,M.Sn', 'Laki-Laki', 'ASD', '2021-09-13', 'ASD', 'ASD', 'Seni Budaya'),
+(32, '16102024', 'DEDDY PRIANTO SIHOMBING', 'LAKI-LAKI', 'MEDAN', '2021-09-13', 'MEDAN', 'ISLAM', 'BAHASA ANGOLIA');
 
 -- --------------------------------------------------------
 
@@ -122,17 +135,9 @@ INSERT INTO `tb_guru` (`id_guru`, `nip`, `nama_guru`, `kode_guru`, `jenis_kelami
 
 CREATE TABLE `tb_kelas` (
   `id_kelas` int(3) NOT NULL,
-  `kelas` varchar(10) NOT NULL
+  `kelas` varchar(10) NOT NULL,
+  `jurusan` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `tb_kelas`
---
-
-INSERT INTO `tb_kelas` (`id_kelas`, `kelas`) VALUES
-(14, 'X'),
-(13, 'XI'),
-(12, 'XII');
 
 -- --------------------------------------------------------
 
@@ -213,7 +218,8 @@ INSERT INTO `tb_pengguna` (`id_pengguna`, `username`, `pass`, `status`) VALUES
 (26, 'admin', 'admin', 'admin'),
 (27, 'tatausaha', 'tatausaha', 'tatausaha'),
 (28, '16102019', 'munawar.guru', 'guru'),
-(29, '16102020', 'rizalii.guru', 'guru');
+(29, '16102020', 'rizalii.guru', 'guru'),
+(31, '16102024', 'asd', 'guru');
 
 -- --------------------------------------------------------
 
@@ -276,16 +282,13 @@ ALTER TABLE `tb_guru`
   ADD PRIMARY KEY (`nip`),
   ADD UNIQUE KEY `id_guru` (`id_guru`),
   ADD UNIQUE KEY `nip` (`nip`),
-  ADD UNIQUE KEY `kode_guru_2` (`kode_guru`),
-  ADD UNIQUE KEY `nama_guru` (`nama_guru`),
-  ADD KEY `kode_guru` (`kode_guru`);
+  ADD UNIQUE KEY `nama_guru` (`nama_guru`);
 
 --
 -- Indeks untuk tabel `tb_kelas`
 --
 ALTER TABLE `tb_kelas`
-  ADD PRIMARY KEY (`id_kelas`),
-  ADD UNIQUE KEY `kelas` (`kelas`);
+  ADD PRIMARY KEY (`id_kelas`);
 
 --
 -- Indeks untuk tabel `tb_mapel`
@@ -319,25 +322,25 @@ ALTER TABLE `tb_siswa`
 -- AUTO_INCREMENT untuk tabel `hasil_absensi`
 --
 ALTER TABLE `hasil_absensi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `jadwal_guru`
 --
 ALTER TABLE `jadwal_guru`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_guru`
 --
 ALTER TABLE `tb_guru`
-  MODIFY `id_guru` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_guru` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_kelas`
 --
 ALTER TABLE `tb_kelas`
-  MODIFY `id_kelas` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_kelas` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_mapel`
@@ -349,7 +352,7 @@ ALTER TABLE `tb_mapel`
 -- AUTO_INCREMENT untuk tabel `tb_pengguna`
 --
 ALTER TABLE `tb_pengguna`
-  MODIFY `id_pengguna` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_pengguna` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_siswa`

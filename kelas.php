@@ -23,9 +23,23 @@
             Input Data Kelas
         </h3>
         <form method="post">
-            <div class="form-group">
+        <div class="form-group">
                 <label>Kelas</label>
-                <input class="form-control" name="kelas" placeholder="Nama Kelas" required>
+                <select name="kelas" class="form-control" required>
+                    <option value="">Pilih Kelas</option>
+                    <option value="X">X</option>
+                    <option value="XI">XI</option>
+                    <option value="XII">XII</option>
+                    
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Jurusan</label>
+                <select name="jurusan" class="form-control" required>
+                    <option value="">Pilih Jurusan</option>
+                    <option value="IPA">IPA</option>
+                    <option value="IPS">IPS</option>
+                </select>
             </div>
             <input type="submit" name="input" class="btn btn-default" value="Input"/>
         </form>
@@ -33,10 +47,9 @@
         <!-- Script Input -->
         <?php 
         if(@$_POST['input']){
-            $kelas=strtoupper($_POST['kelas']);
-            
-            $query=mysqli_query($conn,"insert into tb_kelas(kelas) values('$kelas')");
-            
+            $kelas = $_POST['kelas'];
+            $jurusan = $_POST['jurusan'];
+            $query = mysqli_query($conn,"insert into tb_kelas(kelas,jurusan) values('$kelas','$jurusan')");
             if($query){
             ?>
                 <script type="text/javascript">
@@ -72,6 +85,7 @@
                     <tr>
                         <th>No</th>
                         <th>Kelas</th>
+                        <th>Jurusan</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -82,6 +96,7 @@
                     <tr>
                         <td><?php echo $no=$no+1; ?></td>
                         <td><?php echo $row['kelas']; ?></td>
+                        <td><?php echo $row['jurusan']; ?></td>
                         <td><i><a href="?page=kelas_edit&id=<?php echo $row['id_kelas'];?>">Edit</a> / <a onclick="return confirm('Yakin akan hapus data ini ?')" href="kelas_hapus.php?id=<?php echo $row['id_kelas'];?>">Hapus</a></i></td>
                     </tr>
                     <?php

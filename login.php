@@ -60,7 +60,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="page-header">
-                        <h1>Sistem Absensi Sekolah</h1>
+                        <h1>Sistem Absensi Sekolah </h1>
                     </div>
                     
                         <div class="row">

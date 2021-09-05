@@ -18,11 +18,10 @@
 
 <!-- Isi -->
 
-
 <div class="row" style="margin-bottom:10px;">
     <div class="col-lg-12" style="padding-right:20px; border-right: 1px solid #ccc;">
         <h4 align="center">
-            <b>ROSTER GURU KELAS X</b>
+            <b>ROSTER GURU KELAS X </b>
         </h4>
         <table class="table table-hover table-bordered table-striped">
                         <thead>

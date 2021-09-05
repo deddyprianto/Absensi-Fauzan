@@ -31,9 +31,20 @@
         ?>
 
         <form method="post">
-            <div class="form-group">
+        <div class="form-group">
                 <label>Kelas</label>
-                <input class="form-control" name="kelas" value="<?php echo $data->kelas;?>" required>
+                <select name="kelas" class="form-control" required>
+                    <option value="X" <?= ($data->kelas === 'X') ? 'selected' : ''?>>X</option>
+                    <option value="XI" <?= ($data->kelas === 'XI') ? 'selected' : ''?>>XI</option>
+                    <option value="XII" <?= ($data->kelas === 'XII') ? 'selected' : ''?>>XII</option>
+                </select>
+            </div>
+        <div class="form-group">
+                <label>Jurusan</label>
+                <select name="jurusan" class="form-control" required>
+                    <option value="IPA" <?= ($data->jurusan === 'IPA') ? 'selected' : ''?>>IPA</option>
+                    <option value="IPS" <?= ($data->jurusan === 'IPS') ? 'selected' : ''?>>IPS</option>
+                </select>
             </div>
             <input type="submit" name="edit" class="btn btn-default" value="Edit"/>
         </form>
@@ -41,9 +52,10 @@
         <!-- Sript Update Data -->
         <?php
         if(@$_POST['edit']){
-            $kelas=strtoupper($_POST['kelas']);
+            $kelas=$_POST['kelas'];
+            $jurusan=$_POST['jurusan'];
             
-            $query=mysqli_query($conn,"UPDATE tb_kelas SET kelas='$kelas' WHERE id_kelas='$id'");
+            $query=mysqli_query($conn,"UPDATE tb_kelas SET kelas='$kelas', jurusan='$jurusan' WHERE id_kelas='$id'");
             
             if($query){
                 ?>

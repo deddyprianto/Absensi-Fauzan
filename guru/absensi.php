@@ -43,13 +43,12 @@
                 $view=mysqli_query($conn,"select 
                                         tb_pengguna.username, 
                                         tb_guru.nama_guru,
-                                        tb_guru.jurusan
+                                        tb_guru.mapel
                                     from 
                                         tb_pengguna, 
                                         tb_guru
                                     where tb_pengguna.username='$id_login' AND tb_pengguna.username=tb_guru.nip ");
                 $row=mysqli_fetch_array($view);
-
             ?>
             <div class="form-group">
                 <label>NIP</label>
@@ -61,7 +60,7 @@
             </div>
             <div class="form-group">
                 <label>Mata Pelajaran yg Dibawakan</label>
-                <input name="jurusan" class="form-control" placeholder="" value="<?= $row['jurusan']; ?>" readonly="readonly">
+                <input name="mapel" class="form-control" placeholder="" value="<?= $row['mapel']; ?>" readonly="readonly">
             </div>
             <div class="form-group">
                 <label>Nama Siswa</label>
@@ -77,7 +76,7 @@
                 </select>
             </div>
             <div class="form-group" style="margin-top: 30px;">
-                <select class="form-control" name="kelas">
+                <select class="form-control" name="jurusan">
                     <option selected>Pilih Jurusan</option>
                     <option value="IPA">IPA</option>
                     <option value="IPS">IPS</option>

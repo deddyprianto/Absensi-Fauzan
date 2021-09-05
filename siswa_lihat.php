@@ -49,7 +49,6 @@
                 $kelas2 = mysqli_query($conn,"select * from tb_kelas");
                 while($row2=mysqli_fetch_array($kelas2)){
                     $kelasid=$row2['id_kelas'];
-
                     $siswa=mysqli_query($conn,"select * from tb_siswa where id_kelas='$kelasid'");
                     $jumlah=mysqli_num_rows($siswa);
             ?>
