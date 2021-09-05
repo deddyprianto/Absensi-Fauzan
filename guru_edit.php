@@ -75,7 +75,7 @@
             </div>
             <div class="form-group">
                 <label>Pelajaran</label>
-                <input class="form-control" name="jurusan" value="<?php echo $data->jurusan;?>" required>
+                <input class="form-control" name="mapel" value="<?php echo $data->mapel;?>" required>
             </div>
         </div>
 </div>
@@ -96,9 +96,9 @@
         $tanggal_lahir=$_POST['tanggal_lahir'];
         $alamat=$_POST['alamat'];
         $agama=$_POST['agama'];
-        $jurusan=$_POST['jurusan'];
+        $mapel=$_POST['mapel'];
         $query=mysqli_query($conn,"UPDATE tb_guru SET nip='$nip', nama_guru='$nama_guru', jenis_kelamin='$jenis_kelamin', tempat_lahir='$tempat_lahir',
-                            tanggal_lahir='$tanggal_lahir', alamat='$alamat', agama='$agama', jurusan='$jurusan' WHERE id_guru='$id'");
+                            tanggal_lahir='$tanggal_lahir', alamat='$alamat', agama='$agama', mapel='$mapel' WHERE id_guru='$id'");
 
         $query1=mysqli_query($conn,"UPDATE tb_pengguna SET username='$nip' where id_pengguna='$b->id_pengguna'");
         if($query){

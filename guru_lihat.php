@@ -38,10 +38,12 @@
                     <tr>
                         <th>NIP</th>
                         <th>Nama</th>
-                        <th>Kode Guru</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Tempat Lahir</th>
                         <th>Tanggal Lahir</th>
                         <th>Alamat</th>
                         <th>Agama</th>
+                        <th>Mapel</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -52,10 +54,12 @@
                     <tr>
                         <td><?php echo $raw['nip']; ?></td>
                         <td><?php echo $raw['nama_guru']; ?></td>
-                        <td><?php echo $raw['kode_guru']; ?></td>                       
+                        <td><?php echo $raw['jenis_kelamin']; ?></td>                       
+                        <td><?php echo $raw['tempat_lahir']; ?></td>                       
                         <td><?php echo $raw['tanggal_lahir']; ?></td>
                         <td><?php echo $raw['alamat']; ?></td>
                         <td><?php echo $raw['agama']; ?></td>
+                        <td><?php echo $raw['mapel']; ?></td>
                         <td><i><a href="?page=editguru&id=<?php echo $raw['id_guru'];?>">Edit</a> / <a onclick="return confirm('Yakin akan hapus data ini ?')" href="guru_hapus.php?id=<?php echo $raw['id_guru'];?>">Hapus</a></i></td>
                     </tr>
                     <?php

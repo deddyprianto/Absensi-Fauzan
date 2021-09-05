@@ -64,27 +64,20 @@
                 <input class="form-control" name="alamat" placeholder="Alamat"  required>
             </div>
             <div class="form-group">
-                <label>Nama Orang Tua/Wali</label>
-                <input class="form-control" name="nama_ortu" placeholder="Nama Orang Tua/Wali"  required>
-            </div>
-            <div class="form-group">
-                <label>No Telepon Orang Tua/Wali</label>
-                <input class="form-control" name="no_ortu" placeholder="No Telepon Orang Tua/Wali"  required>
-            </div>
-            <div class="form-group">
                 <label>Kelas</label>
                 <select name="kelas" class="form-control" required>
                     <option value="">Pilih Kelas</option>
-                    <?php 
-                   
-                        $query=mysqli_query($conn,"select * from tb_kelas order by kelas asc");
-                        while($row=mysqli_fetch_array($query))
-                        {
-                    ?>
-                        <option value="<?php  echo $row['id_kelas']; ?>"><?php  echo $row['kelas']; ?></option>
-                    <?php 
-                        }
-                ?>
+                    <option value="X">X</option>
+                    <option value="XI">XI</option>
+                    <option value="XII">XII</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Kelas</label>
+                <select name="jurusan" class="form-control" required>
+                <option value="">Pilih Jurusan</option>
+                    <option value="IPA">IPA</option>
+                    <option value="IPS">IPS</option>
                 </select>
             </div>
         </div>
@@ -113,19 +106,18 @@
         $tgl=@$_POST['tanggal_lahir'];
         $alamat=strtoupper($_POST['alamat']);
         $agama=strtoupper($_POST['agama']);
-        $nama_ortu=strtoupper($_POST['nama_ortu']);
-        $no_ortu=strtoupper($_POST['no_ortu']);
         $kelas=strtoupper($_POST['kelas']);
+        $jurusan=strtoupper($_POST['jurusan']);
 
         $tanggal_lahir = ubahformatTgl($tgl);
         
-        $query=mysqli_query($conn,"insert into tb_siswa(nis, nama_siswa, jenis_kelamin, tempat_lahir, tanggal_lahir, alamat, agama, nama_ortu, no_ortu, id_kelas) values('$nis','$nama_siswa', '$jenis_kelamin',  '$tempat_lahir', '$tanggal_lahir', '$alamat', '$agama', '$nama_ortu', '$no_ortu', '$kelas')");
+        $query=mysqli_query($conn,"insert into tb_siswa(nis, nama_siswa, jenis_kelamin, agama,tempat_lahir, tanggal_lahir, alamat,kelas,jurusan) values('$nis','$nama_siswa', '$jenis_kelamin', '$agama' ,'$tempat_lahir', '$tanggal_lahir', '$alamat', '$kelas', '$jurusan')");
         
         if($query){
         ?>
             <script type="text/javascript">
             alert("Input Data Sukses !")
-            window.location="?page=inputsiswa";
+            window.location="?page=lihatsiswa";
             </script>
         <?php
         }else{
