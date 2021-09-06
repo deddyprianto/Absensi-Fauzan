@@ -51,6 +51,24 @@ ob_start();
 	?>
 	</tbody>
 </table>
+<h3>Ket absensi kelas X</h3>
+<?php 
+	$jumlahHadir = mysqli_query($conn, "SELECT status_kehadiran from hasil_absensi where status_kehadiran='Hadir' AND kelas='X'");
+	$hadir = mysqli_num_rows($jumlahHadir);
+	$jumlahSakit = mysqli_query($conn, "SELECT status_kehadiran from hasil_absensi where status_kehadiran='Sakit' AND kelas='X'");
+	$sakit = mysqli_num_rows($jumlahSakit);
+	$jumlahIzin = mysqli_query($conn, "SELECT status_kehadiran from hasil_absensi where status_kehadiran='Izin' AND kelas='X'");
+	$izin = mysqli_num_rows($jumlahIzin);
+	$jumlahAlpha = mysqli_query($conn, "SELECT status_kehadiran from hasil_absensi where status_kehadiran='Alpha' AND kelas='X'");
+	$alpha = mysqli_num_rows($jumlahAlpha);
+?>
+<ul>
+	<li>Siswa Hadir: <?= $hadir; ?></li>
+	<li>Siswa Sakit: <?= $sakit; ?></li>
+	<li>Siswa Izin: <?= $izin; ?></li>
+	<li>Siswa Alpha: <?= $alpha; ?></li>
+</ul>
+<hr>
 <h3 align="center">Data Absensi Siswa Kelas XI</h3>
 <table style="border-collapse:collapse;border-spacing:0;" align="center" border="1">
 	<thead>
@@ -88,7 +106,25 @@ ob_start();
 	?>
 	</tbody>
 </table>
-<h3 align="center">Data Absensi Siswa Kelas XI</h3>
+<h3>Ket absensi kelas XI</h3>
+<?php 
+	$jumlahHadir = mysqli_query($conn, "SELECT status_kehadiran from hasil_absensi where status_kehadiran='Hadir' AND kelas='XI'");
+	$hadir = mysqli_num_rows($jumlahHadir);
+	$jumlahSakit = mysqli_query($conn, "SELECT status_kehadiran from hasil_absensi where status_kehadiran='Sakit' AND kelas='XI'");
+	$sakit = mysqli_num_rows($jumlahSakit);
+	$jumlahIzin = mysqli_query($conn, "SELECT status_kehadiran from hasil_absensi where status_kehadiran='Izin' AND kelas='XI'");
+	$izin = mysqli_num_rows($jumlahIzin);
+	$jumlahAlpha = mysqli_query($conn, "SELECT status_kehadiran from hasil_absensi where status_kehadiran='Alpha' AND kelas='XI'");
+	$alpha = mysqli_num_rows($jumlahAlpha);
+?>
+<ul>
+	<li>Siswa Hadir: <?= $hadir; ?></li>
+	<li>Siswa Sakit: <?= $sakit; ?></li>
+	<li>Siswa Izin: <?= $izin; ?></li>
+	<li>Siswa Alpha: <?= $alpha; ?></li>
+</ul>
+<hr>
+<h3 align="center">Data Absensi Siswa Kelas XII</h3>
 <table style="border-collapse:collapse;border-spacing:0;" align="center" border="1">
 	<thead>
 		<tr>
@@ -125,6 +161,39 @@ ob_start();
 	?>
 	</tbody>
 </table>
+<h3>Ket absensi kelas XII</h3>
+<?php 
+	$jumlahHadir = mysqli_query($conn, "SELECT status_kehadiran from hasil_absensi where status_kehadiran='Hadir' AND kelas='XII'");
+	$hadir = mysqli_num_rows($jumlahHadir);
+	$jumlahSakit = mysqli_query($conn, "SELECT status_kehadiran from hasil_absensi where status_kehadiran='Sakit' AND kelas='XII'");
+	$sakit = mysqli_num_rows($jumlahSakit);
+	$jumlahIzin = mysqli_query($conn, "SELECT status_kehadiran from hasil_absensi where status_kehadiran='Izin' AND kelas='XII'");
+	$izin = mysqli_num_rows($jumlahIzin);
+	$jumlahAlpha = mysqli_query($conn, "SELECT status_kehadiran from hasil_absensi where status_kehadiran='Alpha' AND kelas='XII'");
+	$alpha = mysqli_num_rows($jumlahAlpha);
+?>
+<ul>
+	<li>Siswa Hadir: <?= $hadir; ?></li>
+	<li>Siswa Sakit: <?= $sakit; ?></li>
+	<li>Siswa Izin: <?= $izin; ?></li>
+	<li>Siswa Alpha: <?= $alpha; ?></li>
+</ul>
+<h5 style="text-align: right; color: gray;">
+Mengetahui, TataUsaha <br> 
+                        <?php
+                            function tanggal($format,$nilai="now"){
+                                $en=array("Sun","Mon","Tue","Wed","Thu","Fri","Sat","Jan","Feb",
+                                "Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec");
+                                $id=array("Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu",
+                                "Jan","Feb","Maret","April","Mei","Juni","Juli","Agustus","September",
+                                "Oktober","November","Desember");
+                                return str_replace($en,$id,date($format,strtotime($nilai)));
+                            }
+
+                            date_default_timezone_set('Asia/Jakarta');
+                            echo tanggal("D, j M Y");
+                        ?>          
+</h2>
 </body>
 </html>
 <?php 

@@ -7,9 +7,9 @@ $hari = $_POST['hari'];
 $nip = $_POST['nip'];
 $guru = $_POST['guru'];
 $mapel = $_POST['mapel'];
-$siswa = $_POST['siswa'];
 $kelas = $_POST['kelas'];
 $jurusan = $_POST['jurusan'];
+$siswa = $_POST['nama'];
 $status = $_POST['status'];
 
 $result = mysqli_query($conn, "INSERT INTO hasil_absensi(tanggal,hari,nip,nama_guru,mapel,nama_siswa,kelas,jurusan,status_kehadiran) VALUES('$tanggal' , '$hari' , '$nip' ,'$guru' , '$mapel' , '$siswa', '$kelas', '$jurusan' , '$status')");

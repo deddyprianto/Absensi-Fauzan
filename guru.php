@@ -133,7 +133,7 @@
         ?>
             <script type="text/javascript">
             alert("Input Data Sukses !")
-            window.location="?page=inputguru";
+            window.location="?page=lihatguru";
             </script>
         <?php
         }else{

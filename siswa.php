@@ -73,7 +73,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Kelas</label>
+                <label>Jurusan</label>
                 <select name="jurusan" class="form-control" required>
                 <option value="">Pilih Jurusan</option>
                     <option value="IPA">IPA</option>
@@ -98,7 +98,6 @@
             $satukan = implode('-',$urutan);
             return $satukan;
         }
-
         $nis=$_POST['nis'];
         $nama_siswa=strtoupper($_POST['nama_siswa']);
         $jenis_kelamin=strtoupper($_POST['jenis_kelamin']);
@@ -108,7 +107,6 @@
         $agama=strtoupper($_POST['agama']);
         $kelas=strtoupper($_POST['kelas']);
         $jurusan=strtoupper($_POST['jurusan']);
-
         $tanggal_lahir = ubahformatTgl($tgl);
         
         $query=mysqli_query($conn,"insert into tb_siswa(nis, nama_siswa, jenis_kelamin, agama,tempat_lahir, tanggal_lahir, alamat,kelas,jurusan) values('$nis','$nama_siswa', '$jenis_kelamin', '$agama' ,'$tempat_lahir', '$tanggal_lahir', '$alamat', '$kelas', '$jurusan')");

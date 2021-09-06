@@ -49,13 +49,17 @@
                     <option value="Perempuan" <?= ($data->jenis_kelamin === 'Perempuan') ? 'selected' : ''?>>Perempuan</option>
                 </select>
             </div>
+               <div class="form-group">
+                <label>Agama</label>
+                <input class="form-control" name="agama" value="<?php echo $data->agama;?>" required>
+            </div>
             <div class="form-group">
                 <label>Tempat Lahir</label>
                 <input class="form-control" name="tempat_lahir" value="<?php echo $data->tempat_lahir;?>" required>
             </div>
             <div class="form-group">
                 <label>Tanggal Lahir</label>
-                <input type="date" class="form-control" name="tanggal_lahir" required>
+                <input type="date" class="form-control"   value="<?php echo $data->tanggal_lahir;?>" name="tanggal_lahir" required>
             </div>
         </div>
 
@@ -65,24 +69,20 @@
                 <input class="form-control" name="alamat" value="<?php echo $data->alamat;?>" required>
             </div>
             <div class="form-group">
-                <label>Agama</label>
-                <input class="form-control" name="agama" value="<?php echo $data->agama;?>" required>
-            </div>
-            <div class="form-group">
-                <label>Nama Orang Tua/Wali</label>
-                <input class="form-control" name="nama_ortu" value="<?php echo $data->nama_ortu;?>" required>
-            </div>
-            <div class="form-group">
-                <label>No Telepon Orang Tua/Wali</label>
-                <input class="form-control" name="no_ortu" value="<?php echo $data->no_ortu;?>" required>
-            </div>
-            <div class="form-group">
                 <label>Kelas</label>
                 <select name="kelas" class="form-control" required>
                     <option value="">Pilih Kelas</option>
                     <option value="X" <?= ($data->kelas === 'X') ? 'selected' : ''?>>X</option>
                     <option value="XI" <?= ($data->kelas === 'XI') ? 'selected' : ''?>>XI</option>
                     <option value="XII" <?= ($data->kelas === 'XII') ? 'selected' : ''?>>XII</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Jurusan</label>
+                <select name="jurusan" class="form-control" required>
+                    <option value="">Pilih Jurusan</option>
+                    <option value="IPA" <?= ($data->jurusan === 'IPA') ? 'selected' : ''?>>IPA</option>
+                    <option value="IPS" <?= ($data->jurusan === 'IPS') ? 'selected' : ''?>>IPS</option>
                 </select>
             </div>
         </div>
@@ -100,17 +100,13 @@
         $nis=$_POST['nis'];
         $nama_siswa=strtoupper($_POST['nama_siswa']);
         $jenis_kelamin=strtoupper($_POST['jenis_kelamin']);
-        $tempat_lahir=strtoupper($_POST['tempat_lahir']);
-        $tanggal_lahir=@$_POST['tanggal_lahir'];
-        $alamat=strtoupper($_POST['alamat']);
         $agama=strtoupper($_POST['agama']);
-        $nama_ortu=strtoupper($_POST['nama_ortu']);
-        $no_ortu=strtoupper($_POST['no_ortu']);
+        $tempat_lahir=strtoupper($_POST['tempat_lahir']);
+        $tanggal_lahir=$_POST['tanggal_lahir'];
+        $alamat=strtoupper($_POST['alamat']);
         $kelas=strtoupper($_POST['kelas']);
-        
-        $query=mysqli_query($conn,"UPDATE tb_siswa SET nis='$nis', nama_siswa='$nama_siswa', jenis_kelamin='$jenis_kelamin',
-                            tempat_lahir='$tempat_lahir', tanggal_lahir='$tanggal_lahir', alamat='$alamat', agama='$agama',
-                            nama_ortu='$nama_ortu', no_ortu='$no_ortu', id_kelas='$kelas' WHERE id_siswa='$id'");
+        $jurusan=strtoupper($_POST['jurusan']);
+        $query=mysqli_query($conn,"UPDATE tb_siswa SET nis='$nis', nama_siswa='$nama_siswa', jenis_kelamin='$jenis_kelamin',agama='$agama', tempat_lahir='$tempat_lahir', tanggal_lahir='$tanggal_lahir', alamat='$alamat',kelas='$kelas', jurusan='$jurusan' WHERE id_siswa='$id'");
         
         if($query){
         ?>

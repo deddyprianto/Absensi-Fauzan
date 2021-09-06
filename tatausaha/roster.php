@@ -46,15 +46,9 @@ include './koneksi.php';
                 <label>Kelas</label>
                 <select name="kelas" class="form-control" required>
                     <option value="">Pilih Kelas</option>
-                    <?php 
-                        $query=mysqli_query($conn,"SELECT * from tb_kelas order by id_kelas asc");
-                        while($row=mysqli_fetch_array($query))
-                        {
-                    ?>
-                        <option value="<?php  echo $row['kelas']; ?>"><?php  echo $row['kelas']; ?></option>
-                    <?php 
-                        }
-                ?>
+                    <option value="X">X</option>
+                    <option value="XI">XI</option>
+                    <option value="XII">XII</option>
                 </select>
             </div>
             <div class="form-group">
